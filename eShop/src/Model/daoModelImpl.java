@@ -21,7 +21,7 @@ public class daoModelImpl implements daoModel {
 /**
  * Method to create the database with the fields of:
  * Primary key: pid
- * ID
+ * ID to identify
  * Income
  * Pep
  * @throws Exception
