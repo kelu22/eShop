@@ -27,21 +27,23 @@ public class daoModelImpl implements daoModel {
  * @throws Exception
  * @throws SQLException
  */
+
  public void createTables() throws Exception, SQLException{
 	 try{
+	System.out.println("He entrado");
 	 statement = connect.getConnection().createStatement();
 	 /**
 	  * Creation of user-related tables
 	  */
-	 //System.out.println("Hola, he conectado");
-     String sql = "CREATE TABLE customers " +
-             "(customer_id INTEGER not NULL, " +
+
+     String sql = "CREATE TABLE customers_ra " +
+             " (customer_id INTEGER not NULL, " +
              " username VARCHAR(20), " + 
              " password NUMERIC(20), " + 
              " isAdmin VARCHAR(3), " + 
              " PRIMARY KEY ( customer_id ))"; 
      
-	 statement.execute(sql);
+	// statement.executeUpdate(sql);
 	 
 	 sql = "CREATE TABLE sellers " +
              "(seller_id INTEGER not NULL, " +
@@ -49,7 +51,8 @@ public class daoModelImpl implements daoModel {
              " password NUMERIC(20), " + 
              " isAdmin VARCHAR(3), " + 
              " PRIMARY KEY ( seller_id ))"; 
-	 statement.execute(sql);
+	 //statement.executeUpdate(sql);
+	 
 	 /**
 	  * Creation of product-related tables
 	  */
@@ -65,7 +68,7 @@ public class daoModelImpl implements daoModel {
              " author VARCHAR(80), " +
              " album_name VARCHAR(100), " +
              " PRIMARY KEY ( music_id ))"; 
-	 statement.execute(sql);
+	 //statement.executeUpdate(sql);
 	 
 	 sql = "CREATE TABLE movie " +
              "(movie_id INTEGER not NULL, " +
@@ -79,7 +82,7 @@ public class daoModelImpl implements daoModel {
              " duration VARCHAR(4), " +
              " trailer VARCHAR(255), " +
              " PRIMARY KEY ( movie_id ))"; 
-	 statement.execute(sql);
+	// statement.executeUpdate(sql);
 	 
 	 sql = "CREATE TABLE electronic " +
              "(electronic_id INTEGER not NULL, " +
@@ -93,81 +96,105 @@ public class daoModelImpl implements daoModel {
              " specifications VARCHAR(255), " +
              " brand VARCHAR(50), " +
              " PRIMARY KEY ( electronic_id ))"; 
-	 statement.execute(sql);
-	 
+	 //statement.executeUpdate(sql);
+
 	 sql = "CREATE TABLE products " +
              "(product_id INTEGER not NULL, " +
+             " PRIMARY KEY (product_id), " +
+             " music_id INTEGER, "+
+             " electronic_id INTEGER, "+
+             " movie_id INTEGER, "+
+             " PRIMARY KEY ( electronic_id ), " +
              " FOREIGN KEY (music_id) REFERENCES music(music_id), " + 
              " FOREIGN KEY (electronic_id) REFERENCES electronic(electronic_id), " + 
-             " FOREIGN KEY (movie_id) REFERENCES movie(movie_id), " +
-             " PRIMARY KEY ( product_id ))"; 
-	 statement.execute(sql);
+             " FOREIGN KEY (movie_id) REFERENCES movie(movie_id)" +
+              ")"; 
+	 //statement.executeUpdate(sql);
+
 	 /**
 	  * Creation of order-related tables
 	  */
 	 sql = "CREATE TABLE orders " +
              "(order_id INTEGER not NULL, " +
-             " FOREIGN KEY (customer_id) REFERENCES customers(customer_id), " + 
-             " FOREIGN KEY (product_id) REFERENCES products(product_id), " + 
-             " PRIMARY KEY ( order_id ))"; 
-	 statement.execute(sql);
-	 
+             " customer_id INTEGER, "+
+             " product_id INTEGER, "+
+             " PRIMARY KEY ( order_id )" +
+             ")"; 
+	 //statement.executeUpdate(sql);
+	 sql = "ALTER TABLE orders ADD FOREIGN KEY (customer_id) REFERENCES customers_ra(customer_id)";
+	 //statement.executeUpdate(sql);
+	 sql = "ALTER TABLE orders ADD FOREIGN KEY (product_id) REFERENCES products(product_id)";
+	 //statement.executeUpdate(sql);
 	 sql = "CREATE TABLE cart " +
              "(cart_id INTEGER not NULL, " +
-             " FOREIGN KEY (customer_id) REFERENCES customers(customer_id), " + 
+             " customer_id INTEGER, "+
+             " product_id INTEGER, "+
+             " FOREIGN KEY (customer_id) REFERENCES customers_ra(customer_id), " + 
              " FOREIGN KEY (product_id) REFERENCES products(product_id), " + 
              " PRIMARY KEY ( cart_id ))"; 
-	 statement.execute(sql);
+	 //statement.executeUpdate(sql);
 	 
-	 sql = "CREATE TABLE productt_list " +
+	 sql = "CREATE TABLE product_list " +
              "(list_id INTEGER not NULL, " +
+             " seller_id INTEGER, "+
+             " product_id INTEGER, "+
              " FOREIGN KEY (seller_id) REFERENCES sellers(seller_id), " + 
              " FOREIGN KEY (product_id) REFERENCES products(product_id), " + 
              " PRIMARY KEY ( list_id ))"; 
-	 statement.execute(sql);
+	 //statement.executeUpdate(sql);
 	 /**
 	  * Creation of rate-related tables
 	  */
 	 sql = "CREATE TABLE ratemusic " +
              "(ratem_id INTEGER not NULL, " +
              " rate NUMERIC(1), " + 
+             " music_id INTEGER, "+
              " FOREIGN KEY (music_id) REFERENCES music(music_id), " + 
              " PRIMARY KEY ( ratem_id ))"; 
-	 statement.execute(sql);
+	 //statement.executeUpdate(sql);
 	 
 	 sql = "CREATE TABLE rateelectronic " +
              "(ratee_id INTEGER not NULL, " +
-             " rate NUMERIC(1), " + 
+             " rate NUMERIC(1), " +
+             " electronic_id INTEGER, "+
              " FOREIGN KEY (electronic_id) REFERENCES electronic(electronic_id), " + 
              " PRIMARY KEY ( ratee_id ))"; 
-	 statement.execute(sql);
+	 //statement.executeUpdate(sql);
 	 
-	 sql = "CREATE TABLE rateelectronic " +
+	 sql = "CREATE TABLE ratemovie " +
              "(ratemo_id INTEGER not NULL, " +
              " rate NUMERIC(1), " + 
+             " movie_id INTEGER, "+
              " FOREIGN KEY (movie_id) REFERENCES movie(movie_id), " + 
              " PRIMARY KEY ( ratemo_id ))"; 
+	 //statement.executeUpdate(sql);
 	 
 	 /**
 	  * Creation of review-related tables
 	  */
 	 sql = "CREATE TABLE musicreview " +
              "(reviewm_id INTEGER not NULL, " +
+             " music_id INTEGER, "+
              " review VARCHAR(255), " + 
-             " FOREIGN KEY (music_id) REFERENCES music(music_id))"; 
-	 statement.execute(sql);
+             " FOREIGN KEY (music_id) REFERENCES music(music_id), "+
+             " PRIMARY KEY ( reviewm_id ))";
+	 //statement.executeUpdate(sql);
 	 
 	 sql = "CREATE TABLE electronicreview " +
              "(reviewe_id INTEGER not NULL, " +
+             " electronic_id INTEGER, "+
              " review VARCHAR(255), " + 
-             " FOREIGN KEY (electronic_id) REFERENCES electronic(electronic_id))"; 
-	 statement.execute(sql);
+             " FOREIGN KEY (electronic_id) REFERENCES electronic(electronic_id), "+
+             " PRIMARY KEY ( reviewe_id ))"; 
+	 //statement.executeUpdate(sql);
 	 
 	 sql = "CREATE TABLE moviereview " +
              "(reviewmov_id INTEGER not NULL, " +
+             " movie_id INTEGER, "+
              " review VARCHAR(255), " + 
-             " FOREIGN KEY (movie_id) REFERENCES movie(movie_id))"; 
-	 statement.execute(sql);
+             " FOREIGN KEY (movie_id) REFERENCES movie(movie_id), "+
+             " PRIMARY KEY ( reviewmov_id ))";
+	 //statement.executeUpdate(sql);
 	
 	 statement.close();
 	 }catch(SQLException e){
@@ -354,7 +381,7 @@ public class daoModelImpl implements daoModel {
 	 try{
 		 statement = connect.getConnection().createStatement();
 		 if(u instanceof Customer){
-			 String sql = "DELETE FROM customers WHERE customer_id = "+id;
+			 String sql = "DELETE FROM customers_ra WHERE customer_id = "+id;
 			 statement.executeUpdate(sql);
 			 sql = "DELETE FROM orders WHERE customer_id = "+id;
 			 statement.executeUpdate(sql);

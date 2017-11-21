@@ -15,7 +15,7 @@ public class Electronic extends Product{
 		this.specifications= specifications;
 		this.brand = brand;
 	}
-	
+
 	public String getSpecifications() {
 		return specifications;
 	}
