@@ -168,7 +168,7 @@ public class daoModelImpl implements daoModel {
              " FOREIGN KEY (movie_id) REFERENCES movie(movie_id), " + 
              " PRIMARY KEY ( ratemo_id ))"; 
 	 //statement.executeUpdate(sql);
-	 
+
 	 /**
 	  * Creation of review-related tables
 	  */
