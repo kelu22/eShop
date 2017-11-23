@@ -79,6 +79,7 @@ public class LoginController {
 	 * If accepted, return a sessionID for the authorized session otherwise,
 	 * return null.
 	 * @throws Exception 
+	 * 
 	 */
 	private String authorize() throws Exception {
 		int id = 0;
@@ -101,7 +102,6 @@ public class LoginController {
 			alert.setTitle("Error Dialog");
 			alert.setHeaderText("Error Dialog");
 			alert.setContentText("This user is not in the DB");
-
 			alert.showAndWait();
 			System.out.println("This user is not in the DB");
 		}else{
@@ -109,7 +109,6 @@ public class LoginController {
 			sessionID = generateSessionID();
 		}
 		return sessionID;
-		//return "open".equals(user.getText()) && "sesame".equals(password.getText()) ? generateSessionID() : null;
 	}
 
 	private static int sessionIDcounter = 0;
