@@ -12,13 +12,14 @@ public interface daoModel {
 	 public void insertUser(User  u)throws Exception;
 	 public void insertProduct(Product  p)throws Exception;
 	 public void insertRating(double rate, Product  p)throws Exception;
-	 public void insertOrder(Product p, User u);
-	 public void insertCart(Product p, User u);
-	 public void insertProductList(Product p, User u);
+	 public void insertOrder(Product p, User u)throws Exception;
+	 public void insertCart(Product p, User u)throws Exception;
+	 public void insertProductList(Product p, User u)throws Exception;
 	 public int searchIdUser(User u) throws Exception;
 	 public int searchIdProduct(Product  p)throws Exception;
 	 public void deleteUser(User u) throws Exception;
 	 public void deleteProduct(Product p) throws Exception;
-	 public List<Product> getProducts();
+	 public List<Product> getProducts() throws Exception;
+	 public void showTable(String nametable)throws Exception;
 	 
 }

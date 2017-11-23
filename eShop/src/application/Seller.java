@@ -7,9 +7,8 @@ public class Seller extends User {
 	private List<Product> productList = new ArrayList<Product>();
 	private double rating;
 	
-	public Seller(int id, String username, String password, boolean isAdmin, List<Product> productList, double rating) {
-		super(id, username, password, isAdmin);
-		this.productList = productList;
+	public Seller(String username, String password, boolean isAdmin,double rating) {
+		super(username, password, isAdmin);
 		this.rating = rating;
 	}
 	public List<Product> getProductList() {

@@ -27,9 +27,21 @@ public class Store extends Application implements View{
 	public static void main(String[] args) {
 		launch(args);
 		try {
-			System.out.println("Arturo es un pesado");
 			daoModel dao = new Model.daoModelImpl();
-			dao.createTables();
+			//dao.createTables();
+			User u = new Customer("Arturo", "raquelwapa", false);
+			//dao.insertUser(u);
+			//dao.deleteUser(u);
+			//System.out.println(dao.searchIdUser(u));
+			User v = new Customer("Paloma", "arturocachonda", false);
+			//dao.insertUser(v);
+			//dao.deleteUser(v);
+			//dao.deleteUser(v);
+			//System.out.println(dao.searchIdUser(v));
+			User s = new Seller("Tere", "OT", false,0);
+			//dao.insertUser(s);
+			//dao.deleteUser(s);
+			dao.showTable("sellers_ar");
 		} catch (SQLException e) {
 			 System.err.println("SQLState: " +
 	                    ((SQLException)e).getSQLState());

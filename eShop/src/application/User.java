@@ -6,18 +6,13 @@ public abstract class User {
 	protected String password;
 	protected boolean isAdmin;
 	
-	public User(int id, String username, String password, boolean isAdmin) {
-		this.id = id;
+	public User(String username, String password, boolean isAdmin) {
 		this.username = username;
 		this.password = password;
 		this.isAdmin = isAdmin;
 	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	
+	
 	public String getUsername() {
 		return username;
 	}
