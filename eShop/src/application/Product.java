@@ -1,12 +1,13 @@
 package application;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 public abstract class Product {
 	protected String name;
 	protected String description;
-	protected Image image;
+	protected BufferedImage image;
 	protected double price;
 	protected double rate;
 	protected List<String> reviews;
@@ -34,7 +35,7 @@ public abstract class Product {
 		return image;
 	}
 
-	public void setImage(Image image) {
+	public void setImage(BufferedImage image) {
 		this.image = image;
 	}
 
@@ -78,15 +79,12 @@ public abstract class Product {
 		this.purchaseDate = purchaseDate;
 	}
 
-	public Product(String name, String description, Image image, double price, double rate, List<String> reviews,
-			List<Integer> ratings, int stockCounter, String purchaseDate) {
+	public Product(String name, String description, BufferedImage image, double price, double rate, int stockCounter, String purchaseDate) {
 		this.name = name;
 		this.description = description;
 		this.image = image;
 		this.price = price;
 		this.rate = rate;
-		this.ratings = ratings;
-		this.reviews = reviews;
 		this.stockCounter = stockCounter;
 		this.purchaseDate = purchaseDate;
 	}
