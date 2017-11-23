@@ -290,6 +290,32 @@ public class daoModelImpl implements daoModel {
 		}
 	}
 
+	
+	public int returnUser(User u) throws Exception {
+		int id=0;
+		try {
+			statement = connect.getConnection().createStatement();
+			if (u instanceof Customer) {
+				String sql = "SELECT customer_id FROM customers_ar WHERE username='" + u.getUsername() + "' AND password='" + u.getPassword()+"'";
+				ResultSet rs = statement.executeQuery(sql);
+				rs.next();
+				id = rs.getInt("customer_id");
+
+			} else {
+				String sql = "SELECT seller_id FROM sellers_ar WHERE username= '" + u.getUsername() + "' AND password='" + u.getPassword()+"'";
+				ResultSet rs = statement.executeQuery(sql);
+				rs.next();
+				System.out.println("El id de " + u.getUsername() + " es " + rs.getInt("seller_id"));
+				id = rs.getInt("seller_id");
+			}
+			statement.close();
+		} catch (SQLException e) {
+			System.err.println("SQLState: " + ((SQLException) e).getSQLState());
+			System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
+			System.err.println(e.getMessage());
+		}
+		return id;
+	}
 	public int searchIdUser(User u) throws Exception {
 		int id = 0;
 		try {

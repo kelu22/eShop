@@ -21,6 +21,8 @@ public interface daoModel {
 	public void insertCart(Product p, User u) throws Exception;
 
 	public void insertProductList(Product p, User u) throws Exception;
+	
+	public int returnUser(User u) throws Exception;
 
 	public int searchIdUser(User u) throws Exception;
 
