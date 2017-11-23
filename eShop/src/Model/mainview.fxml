@@ -27,16 +27,10 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <StackedPane prefHeight="-1.0" prefWidth="-1.0">
-            <children>
-                <Button fx:id="loginButton" alignment="CENTER" defaultButton="true" mnemonicParsing="false" text="Login" StackPane.alignment="CENTER_LEFT" />
-              </children>
+            <StackPane prefHeight="-1.0" prefWidth="-1.0">
               <children>
-                <Button fx:id="registerButton" alignment="CENTER" defaultButton="true" mnemonicParsing="false" text="Register" StackPane.alignment="CENTER_RIGHT" />
+                <Button id="loginButton" fx:id="logoutButton" alignment="CENTER" defaultButton="true" mnemonicParsing="false" text="Logout" StackPane.alignment="CENTER_RIGHT" />
               </children>
-              <children>
-             	 <CheckBox fx:id="checkBox" text="Seller?" />
-             </children>
             </StackPane>
           </children>
         </VBox>

@@ -23,20 +23,20 @@ public class LoginController {
     private CheckBox checkBox ;
 	
 	private boolean isSeller = false;
+	String sessionID = null;
 
 	public void initManager(final Model.LoginManager loginManager) {
 		loginButton.setOnAction((event) -> {
-			String sessionID = null;
 			try {
-				//sessionID = authorize();
+				sessionID = authorize();
 				authorize();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			//if (sessionID != null) {
-				//loginManager.authenticated(sessionID);
-			//}
+			if (sessionID != null) {
+				loginManager.authenticated(sessionID);
+			}
 		});
 		
 
@@ -76,7 +76,7 @@ public class LoginController {
 	 * return null.
 	 * @throws Exception 
 	 */
-	private void authorize() throws Exception {
+	private String authorize() throws Exception {
 		int id = 0;
 		User u;
 		//Call method that returns ask in DB if username and pass exists
@@ -97,14 +97,16 @@ public class LoginController {
 			System.out.println("This user is not in the DB");
 		}else{
 			System.out.println("Yey! this user does exist in the DB");
+			sessionID = generateSessionID();
 		}
+		return sessionID;
 		//return "open".equals(user.getText()) && "sesame".equals(password.getText()) ? generateSessionID() : null;
 	}
 
-	private static int sessionID = 0;
+	private static int sessionIDcounter = 0;
 
 	private String generateSessionID() {
-		sessionID++;
-		return "Login - session " + sessionID;
+		sessionIDcounter++;
+		return "Login - session " + sessionIDcounter;
 	}
 }
