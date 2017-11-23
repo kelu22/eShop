@@ -7,7 +7,7 @@ import java.util.List;
 public abstract class Product {
 	protected String name;
 	protected String description;
-	protected BufferedImage image;
+	protected String image;
 	protected double price;
 	protected double rate;
 	protected List<String> reviews;
@@ -31,11 +31,11 @@ public abstract class Product {
 		this.description = description;
 	}
 
-	public Image getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(BufferedImage image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 
@@ -79,7 +79,7 @@ public abstract class Product {
 		this.purchaseDate = purchaseDate;
 	}
 
-	public Product(String name, String description, BufferedImage image, double price, double rate, int stockCounter, String purchaseDate) {
+	public Product(String name, String description, String image, double price, double rate, int stockCounter, String purchaseDate) {
 		this.name = name;
 		this.description = description;
 		this.image = image;

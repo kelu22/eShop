@@ -183,23 +183,23 @@ public class daoModelImpl implements daoModel {
 			statement = connect.getConnection().createStatement();
 			// System.out.println("Hola, he conectado");
 			if (p instanceof Music) {
-				Music p2 = (Music) p;
-				String sql = "INSERT INTO music_ar(name, descripcion, image, price, rate, stockcounter, purchasedate, author, albumname) "
+
+				String sql = "INSERT INTO music_ar(name, description, image, price, rate, stock_counter, purchase_date, author, album_name) "
 						+ "VALUES ('" + p.getName() + "', '" + p.getDescription() + "', '" + p.getImage() + "', '"
 						+ p.getPrice() + "', '" + p.getRate() + "', '" + p.getStockCounter() + "', '"
-						+ p.getPurchaseDate() + "', '" + p2.getAuthor() + "', '" + p2.getAlbumName() + "')";
+						+ p.getPurchaseDate() + "', '" + ((Music) p).getAuthor() + "', '" + ((Music) p).getAlbumName() + "')";
 				statement.executeUpdate(sql);
 
 			} else if (p instanceof Electronic) {
 				Electronic p2 = (Electronic) p;
-				String sql = "INSERT INTO electronic_ar(name, descripcion, image, price, rate, stockcounter, purchasedate, specifications, brand) "
+				String sql = "INSERT INTO electronic_ar(name, description, image, price, rate, stock_counter, purchase_date, specifications, brand) "
 						+ "VALUES ('" + p.getName() + "', '" + p.getDescription() + "', '" + p.getImage() + "', '"
 						+ p.getPrice() + "', '" + p.getRate() + "', '" + p.getStockCounter() + "', '"
 						+ p.getPurchaseDate() + "', '" + p2.getSpecifications() + "', '" + p2.getBrand() + "')";
 				statement.executeUpdate(sql);
 			} else {
 				Movie p2 = (Movie) p;
-				String sql = "INSERT INTO movie_ar(name, descripcion, image, price, rate, stockcounter, purchasedate, duration, trailer) "
+				String sql = "INSERT INTO movie_ar(name, description, image, price, rate, stock_counter, purchase_date, duration, trailer) "
 						+ "VALUES ('" + p.getName() + "', '" + p.getDescription() + "', '" + p.getImage() + "', '"
 						+ p.getPrice() + "', '" + p.getRate() + "', '" + p.getStockCounter() + "', '"
 						+ p.getPurchaseDate() + "', '" + p2.getDuration() + "', '" + p2.getTrailer() + "')";
@@ -574,24 +574,29 @@ public class daoModelImpl implements daoModel {
 				while (rs.next()) {
 					System.out.println(rs.getString("username"));
 				}
+				break;
 			case "music_ar":
 				sql = "SELECT * FROM music_ar";
 				rs = statement.executeQuery(sql);
+				System.out.println("Lista de canciones");
 				while (rs.next()) {
 					System.out.println(rs.getString("name"));
 				}
+				break;
 			case "electronic_ar":
 				sql = "SELECT * FROM electronic_ar";
 				rs = statement.executeQuery(sql);
 				while (rs.next()) {
 					System.out.println(rs.getString("name"));
 				}
+				break;
 			case "movie_ar":
 				sql = "SELECT * FROM movie_ar";
 				rs = statement.executeQuery(sql);
 				while (rs.next()) {
 					System.out.println(rs.getString("name"));
 				}
+				break;
 			}
 
 		} catch (Exception e) {

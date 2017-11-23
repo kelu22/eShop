@@ -11,7 +11,7 @@ public class Movie extends Product {
 	private String duration;
 	private String trailer;
 
-	public Movie(String name, String description, BufferedImage image, double price, double rate, int stockCounter, String purchaseDate, String duration, String trailer) {
+	public Movie(String name, String description, String image, double price, double rate, int stockCounter, String purchaseDate, String duration, String trailer) {
 		super(name, description, image, price, rate, stockCounter, purchaseDate);
 		this.duration = duration;
 		this.trailer = trailer;

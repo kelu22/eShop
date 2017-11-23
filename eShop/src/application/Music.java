@@ -10,7 +10,7 @@ public class Music extends Product {
 	private String author;
 	private String albumName;
 
-	public Music(String name, String description, BufferedImage image, double price, double rate, int stockCounter, String purchaseDate, String author, String albumName) {
+	public Music(String name, String description, String image, double price, double rate, int stockCounter, String purchaseDate, String author, String albumName) {
 		super(name, description, image, price, rate, stockCounter, purchaseDate);
 		this.author = author;
 		this.albumName = albumName;

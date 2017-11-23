@@ -1,5 +1,7 @@
 package application;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -12,6 +14,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import Model.LoginManager;
 import javafx.scene.Scene;
@@ -40,6 +44,8 @@ public class Store extends Application implements View {
 			// dao.insertUser(s);
 			// dao.deleteUser(s);
 			dao.showTable("sellers_ar");
+
+
 		} catch (SQLException e) {
 			System.err.println("SQLState: " + ((SQLException) e).getSQLState());
 
