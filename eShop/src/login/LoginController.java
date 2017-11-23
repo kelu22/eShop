@@ -32,7 +32,6 @@ public class LoginController {
 				sessionID = authorize();
 				authorize();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if (sessionID != null) {
