@@ -1,6 +1,7 @@
 package application;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 import javafx.scene.Scene;
@@ -10,9 +11,8 @@ public class Movie extends Product {
 	private String duration;
 	private String trailer;
 
-	public Movie(String name, String description, Image image, double price, double rate, List<String> reviews,
-			List<Integer> ratings, int stockCounter, String purchaseDate, String duration, String trailer) {
-		super(name, description, image, price, rate, reviews, ratings, stockCounter, purchaseDate);
+	public Movie(String name, String description, BufferedImage image, double price, double rate, int stockCounter, String purchaseDate, String duration, String trailer) {
+		super(name, description, image, price, rate, stockCounter, purchaseDate);
 		this.duration = duration;
 		this.trailer = trailer;
 	}

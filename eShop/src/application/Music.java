@@ -1,6 +1,7 @@
 package application;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 import javafx.scene.Scene;
@@ -9,9 +10,8 @@ public class Music extends Product {
 	private String author;
 	private String albumName;
 
-	public Music(String name, String description, Image image, double price, double rate, List<String> reviews,
-			List<Integer> ratings, int stockCounter, String purchaseDate, String author, String albumName) {
-		super(name, description, image, price, rate, reviews, ratings, stockCounter, purchaseDate);
+	public Music(String name, String description, BufferedImage image, double price, double rate, int stockCounter, String purchaseDate, String author, String albumName) {
+		super(name, description, image, price, rate, stockCounter, purchaseDate);
 		this.author = author;
 		this.albumName = albumName;
 	}
