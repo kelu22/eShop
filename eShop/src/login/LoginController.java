@@ -70,7 +70,6 @@ public class LoginController {
 		alert.setTitle("Information Dialog");
 		alert.setHeaderText(null);
 		alert.setContentText("This user has been registered!");
-
 		alert.showAndWait();
 		System.out.println("The user: " + u.getUsername() + " has been registered into the DB");
 	}
