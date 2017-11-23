@@ -39,7 +39,6 @@ public class Store extends Application implements View {
 			User s = new Seller("Tere", "OT", false, 0);
 			// dao.insertUser(s);
 			// dao.deleteUser(s);
-			//cambio
 			dao.showTable("sellers_ar");
 		} catch (SQLException e) {
 			System.err.println("SQLState: " + ((SQLException) e).getSQLState());
