@@ -7,6 +7,7 @@ import application.Customer;
 import application.Seller;
 import application.User;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 
 /** Controls the login screen */
 public class LoginController {
@@ -65,8 +66,13 @@ public class LoginController {
 			u = new Seller (user.getText(), password.getText(), false,0);
 		}
 		dao.insertUser(u);
-		//Pop up you have been registered!
-		System.out.println("The user: " + u.getUsername() + "has been registered into the DB");
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Information Dialog");
+		alert.setHeaderText(null);
+		alert.setContentText("This user has been registered!");
+
+		alert.showAndWait();
+		System.out.println("The user: " + u.getUsername() + " has been registered into the DB");
 	}
 
 	/**
@@ -93,7 +99,12 @@ public class LoginController {
 			e.printStackTrace();
 		}
 		if (id == 0){
-			//Pop up meeeeh wrong!
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Dialog");
+			alert.setHeaderText("Error Dialog");
+			alert.setContentText("This user is not in the DB");
+
+			alert.showAndWait();
 			System.out.println("This user is not in the DB");
 		}else{
 			System.out.println("Yey! this user does exist in the DB");
