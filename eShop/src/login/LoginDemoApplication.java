@@ -21,6 +21,7 @@ public class LoginDemoApplication extends Application {
 		LoginManager loginManager = new LoginManager(scene);
 		loginManager.showLoginScreen();
 
+		stage.sizeToScene();
 		stage.setScene(scene);
 		stage.show();
 	}

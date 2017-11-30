@@ -14,7 +14,7 @@ public class MainViewController {
 
 	public void setUsername(final Model.LoginManager loginManager, String username) {
 
-		usernameLabel.setText(username);
+		usernameLabel.setText("Welcome back "+ username +"!");
 
 		logoutButton.setOnAction(e -> loginManager.logout());
 

@@ -44,13 +44,13 @@ public class LoginController {
 				Product p = new Music("ok", "ok", "image.png", 2, 5, 1,"2345", "author", "album");
 				//dao.insertProduct(p);
 				dao.showTable("music_ar");
-				sessionID = authorize();
+				username = authorize();
 				authorize();
 				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			if (sessionID != null) {
+			if (username != null) {
 				//Launch main View
 				//loginManager.authenticated(sessionID);
 				loginManager.authenticated(username);
