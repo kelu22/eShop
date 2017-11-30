@@ -34,6 +34,7 @@ public class LoginController {
 
 	private boolean isSeller = false;
 	String sessionID = null;
+	String username = null;
 
 	public void initManager(final Model.LoginManager loginManager) {
 		loginButton.setOnAction((event) -> {
@@ -50,7 +51,9 @@ public class LoginController {
 				e.printStackTrace();
 			}
 			if (sessionID != null) {
-				loginManager.authenticated(sessionID);
+				//Launch main View
+				//loginManager.authenticated(sessionID);
+				loginManager.authenticated(username);
 			}
 		});
 
@@ -122,10 +125,11 @@ public class LoginController {
 			alert.showAndWait();
 			System.out.println("This user is not in the DB");
 		} else {
-			System.out.println("Yey! this user does exist in the DB");
-			sessionID = generateSessionID();
+			//System.out.println("Yey! this user does exist in the DB");
+			//sessionID = generateSessionID();
+			username = u.getUsername();
 		}
-		return sessionID;
+		return username;
 	}
 
 	private static int sessionIDcounter = 0;

@@ -10,14 +10,11 @@ public class MainViewController {
 	@FXML
 	private Button logoutButton;
 	@FXML
-	private Label sessionLabel;
+	private Label usernameLabel;
 
-	public void initialize() {
-	}
+	public void setUsername(final Model.LoginManager loginManager, String username) {
 
-	public void initSessionID(final Model.LoginManager loginManager, String sessionID) {
-
-		sessionLabel.setText(sessionID);
+		usernameLabel.setText(username);
 
 		logoutButton.setOnAction(e -> loginManager.logout());
 
