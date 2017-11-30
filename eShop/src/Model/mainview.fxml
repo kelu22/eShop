@@ -14,7 +14,7 @@
          <children>
             <Label fx:id="usernameLabel" prefHeight="27.0" prefWidth="168.0" text="Welcome back username!" />
             <TextField prefHeight="24.0" prefWidth="251.0" promptText="Search..." />
-            <Button fx:id="mycartButton" mnemonicParsing="false" text="My cart" />
+            <Button mnemonicParsing="false" text="My cart" />
             <Button fx:id="logoutButton" mnemonicParsing="false" text="Log out" />
          </children>
          <padding>
@@ -33,12 +33,12 @@
          <children>
             <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
                <items>
-                  <ImageView id="imovie1" fitHeight="131.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="imovie1" fx:id="imovie1" fitHeight="131.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../../../../../Documents/Imágenes/Captura%20de%20pantalla%202017-03-20%20a%20las%2012.14.52.png" />
                      </image>
                   </ImageView>
-                  <Label text="Product name">
+                  <Label id="lmovie1" text="Product name">
                      <padding>
                         <Insets top="5.0" />
                      </padding>
@@ -47,12 +47,12 @@
             </SplitPane>
             <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
               <items>
-                  <ImageView id="imovie1" fitHeight="131.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="imovie2" fitHeight="131.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../../../../../Documents/Imágenes/Captura%20de%20pantalla%202017-03-20%20a%20las%2012.14.52.png" />
                      </image>
                   </ImageView>
-                  <Label text="Product name">
+                  <Label id="lmovie2" text="Product name">
                      <padding>
                         <Insets top="5.0" />
                      </padding>
@@ -61,12 +61,12 @@
             </SplitPane>
             <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
                <items>
-                  <ImageView id="imovie1" fitHeight="131.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="imovie3" fitHeight="131.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../../../../../Documents/Imágenes/Captura%20de%20pantalla%202017-03-20%20a%20las%2012.14.52.png" />
                      </image>
                   </ImageView>
-                  <Label text="Product name">
+                  <Label id="lmovie3" text="Product name">
                      <padding>
                         <Insets top="5.0" />
                      </padding>
@@ -93,12 +93,12 @@
          <children>
             <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
                <items>
-                  <ImageView id="imovie1" fitHeight="131.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="imusic1" fitHeight="131.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../../../../../Documents/Imágenes/Captura%20de%20pantalla%202017-03-20%20a%20las%2012.14.52.png" />
                      </image>
                   </ImageView>
-                  <Label text="Product name">
+                  <Label id="lmlmusic1" text="Product name">
                      <padding>
                         <Insets top="5.0" />
                      </padding>
@@ -107,12 +107,12 @@
             </SplitPane>
             <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
                <items>
-                  <ImageView id="imovie1" fitHeight="131.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="imusic2" fitHeight="131.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../../../../../Documents/Imágenes/Captura%20de%20pantalla%202017-03-20%20a%20las%2012.14.52.png" />
                      </image>
                   </ImageView>
-                  <Label text="Product name">
+                  <Label id="lmusic2" text="Product name">
                      <padding>
                         <Insets top="5.0" />
                      </padding>
@@ -121,12 +121,12 @@
             </SplitPane>
             <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
                <items>
-                  <ImageView id="imovie1" fitHeight="131.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="imusic3" fitHeight="131.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../../../../../Documents/Imágenes/Captura%20de%20pantalla%202017-03-20%20a%20las%2012.14.52.png" />
                      </image>
                   </ImageView>
-                  <Label text="Product name">
+                  <Label id="lmusic3" text="Product name">
                      <padding>
                         <Insets top="5.0" />
                      </padding>
@@ -150,12 +150,12 @@
          <children>
             <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
                <items>
-                  <ImageView id="imovie1" fitHeight="131.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="ielec1" fitHeight="131.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../../../../../Documents/Imágenes/Captura%20de%20pantalla%202017-03-20%20a%20las%2012.14.52.png" />
                      </image>
                   </ImageView>
-                  <Label text="Product name">
+                  <Label id="lelec1" text="Product name">
                      <padding>
                         <Insets top="5.0" />
                      </padding>
@@ -164,12 +164,12 @@
             </SplitPane>
             <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
                <items>
-                  <ImageView id="imovie1" fitHeight="131.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="ielec2" fitHeight="131.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../../../../../Documents/Imágenes/Captura%20de%20pantalla%202017-03-20%20a%20las%2012.14.52.png" />
                      </image>
                   </ImageView>
-                  <Label text="Product name">
+                  <Label id="lelec2" text="Product name">
                      <padding>
                         <Insets top="5.0" />
                      </padding>
@@ -178,12 +178,12 @@
             </SplitPane>
             <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
                <items>
-                  <ImageView id="imovie1" fitHeight="131.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="ielec3" fitHeight="131.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../../../../../Documents/Imágenes/Captura%20de%20pantalla%202017-03-20%20a%20las%2012.14.52.png" />
                      </image>
                   </ImageView>
-                  <Label text="Product name">
+                  <Label id="lelec3" text="Product name">
                      <padding>
                         <Insets top="5.0" />
                      </padding>

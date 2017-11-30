@@ -47,8 +47,18 @@ public class LoginManager {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("mainview.fxml"));
 			scene.setRoot((Parent) loader.load());
 			MainViewController controller = loader.<MainViewController>getController();
-			System.out.print("El username es:"+ username);
-			controller.setUsername(this, username);
+			controller.userInteraction(this, username);
+		} catch (IOException ex) {
+			Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+	
+	public void showProduct() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("productView.fxml"));
+			scene.setRoot((Parent) loader.load());
+			//MainViewController controller = loader.<MainViewController>getController();
+			//controller.userInteraction();
 		} catch (IOException ex) {
 			Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
 		}
