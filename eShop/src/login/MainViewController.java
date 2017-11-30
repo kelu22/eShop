@@ -58,15 +58,15 @@ public class MainViewController {
 		
 		//Actions triggered in the view
 		logoutButton.setOnAction(e -> loginManager.logout());
-		imovie1.setOnMouseClicked(e -> loginManager.showProduct());
-		imovie2.setOnMouseClicked(e -> loginManager.showProduct());
-		imovie3.setOnMouseClicked(e -> loginManager.showProduct());
-		imusic1.setOnMouseClicked(e -> loginManager.showProduct());
-		imusic2.setOnMouseClicked(e -> loginManager.showProduct());
-		imusic3.setOnMouseClicked(e -> loginManager.showProduct());
-		ielec1.setOnMouseClicked(e -> loginManager.showProduct());
-		ielec2.setOnMouseClicked(e -> loginManager.showProduct());
-		ielec3.setOnMouseClicked(e -> loginManager.showProduct());
+		imovie1.setOnMouseClicked(e -> loginManager.showProduct(username));
+		imovie2.setOnMouseClicked(e -> loginManager.showProduct(username));
+		imovie3.setOnMouseClicked(e -> loginManager.showProduct(username));
+		imusic1.setOnMouseClicked(e -> loginManager.showProduct(username));
+		imusic2.setOnMouseClicked(e -> loginManager.showProduct(username));
+		imusic3.setOnMouseClicked(e -> loginManager.showProduct(username));
+		ielec1.setOnMouseClicked(e -> loginManager.showProduct(username));
+		ielec2.setOnMouseClicked(e -> loginManager.showProduct(username));
+		ielec3.setOnMouseClicked(e -> loginManager.showProduct(username));
 		
 	}
 }

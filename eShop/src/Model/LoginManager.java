@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import login.LoginController;
 import login.MainViewController;
+import login.ProductViewController;
 
 /** Manages control flow for logins */
 public class LoginManager {
@@ -42,7 +43,7 @@ public class LoginManager {
 		}
 	}
 
-	private void showMainView(String username) {
+	public void showMainView(String username) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("mainview.fxml"));
 			scene.setRoot((Parent) loader.load());
@@ -53,12 +54,12 @@ public class LoginManager {
 		}
 	}
 	
-	public void showProduct() {
+	public void showProduct(String username) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("productView.fxml"));
 			scene.setRoot((Parent) loader.load());
-			//MainViewController controller = loader.<MainViewController>getController();
-			//controller.userInteraction();
+			ProductViewController controller = loader.<ProductViewController>getController();
+			controller.userInteraction(this,username);
 		} catch (IOException ex) {
 			Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
 		}
