@@ -50,4 +50,9 @@ public class Electronic extends Product {
 
 	}
 
+	@Override
+	public void addReview(String review) {
+		reviews.add(review);	
+	}
+
 }

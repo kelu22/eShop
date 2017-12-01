@@ -55,4 +55,10 @@ public class Music extends Product {
 		this.stockCounter -= amount;
 	}
 
+	@Override
+	public void addReview(String review) {
+		reviews.add(review);
+		
+	}
+
 }

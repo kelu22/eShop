@@ -91,6 +91,8 @@ public abstract class Product {
 
 	public abstract void showView();
 
+	public abstract void addReview(String review);
+	
 	public abstract void modifyRating(int rating);
 
 	public abstract void modifyAmount(double amount);

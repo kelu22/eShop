@@ -51,4 +51,10 @@ public class Movie extends Product {
 
 	}
 
+	@Override
+	public void addReview(String review) {
+		reviews.add(review);
+		
+	}
+
 }
