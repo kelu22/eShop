@@ -70,9 +70,9 @@ public class daoModelImpl implements daoModel {
 
 			sql = "CREATE TABLE products_ar " + "(product_id INTEGER not NULL AUTO_INCREMENT, "
 					+ " PRIMARY KEY (product_id), " + " music_id INTEGER, " + " electronic_id INTEGER, "
-					+ " movie_id INTEGER, " + " FOREIGN KEY (music_id) REFERENCES music_ar(music_id), "
+					+ " movie_id INTEGER, "  + " seller_id INTEGER, "+" FOREIGN KEY (music_id) REFERENCES music_ar(music_id), "
 					+ " FOREIGN KEY (electronic_id) REFERENCES electronic_ar(electronic_id), "
-					+ " FOREIGN KEY (movie_id) REFERENCES movie_ar(movie_id)" + ")";
+					+ " FOREIGN KEY (movie_id) REFERENCES movie_ar(movie_id),"+" FOREIGN KEY(seller_id) REFERENCES sellers_ar(seller_id) " + ")";
 			statement.executeUpdate(sql);
 
 			/**
@@ -81,9 +81,9 @@ public class daoModelImpl implements daoModel {
 			sql = "CREATE TABLE orders_ar " + "(order_id INTEGER not NULL AUTO_INCREMENT, " + " customer_id INTEGER, "
 					+ " product_id INTEGER, " + " PRIMARY KEY ( order_id )" + ")";
 			statement.executeUpdate(sql);
-			sql = "ALTER TABLE orders ADD FOREIGN KEY (customer_id) REFERENCES customers_ar(customer_id)";
+			sql = "ALTER TABLE orders_ar ADD FOREIGN KEY (customer_id) REFERENCES customers_ar(customer_id)";
 			// statement.executeUpdate(sql);
-			sql = "ALTER TABLE orders ADD FOREIGN KEY (product_id) REFERENCES products_ar(product_id)";
+			sql = "ALTER TABLE orders_ar ADD FOREIGN KEY (product_id) REFERENCES products_ar(product_id)";
 			statement.executeUpdate(sql);
 			sql = "CREATE TABLE cart_ar " + "(cart_id INTEGER not NULL AUTO_INCREMENT, " + " customer_id INTEGER, "
 					+ " product_id INTEGER, " + " FOREIGN KEY (customer_id) REFERENCES customers_ar(customer_id), "
@@ -189,6 +189,11 @@ public class daoModelImpl implements daoModel {
 						+ p.getPrice() + "', '" + p.getRate() + "', '" + p.getStockCounter() + "', '"
 						+ p.getPurchaseDate() + "', '" + ((Music) p).getAuthor() + "', '" + ((Music) p).getAlbumName() + "')";
 				statement.executeUpdate(sql);
+				int idp = searchIdProduct(p);
+				int idu = searchIdUserProduct(p);
+				sql = "INSERT INTO products_ar(music_id, electronic_id, movie_id)"
+					+"VALUES('"+idp+"', 'NULL', 'NULL', "+idu+"')";
+				statement.executeUpdate(sql);
 
 			} else if (p instanceof Electronic) {
 				Electronic p2 = (Electronic) p;
@@ -197,12 +202,22 @@ public class daoModelImpl implements daoModel {
 						+ p.getPrice() + "', '" + p.getRate() + "', '" + p.getStockCounter() + "', '"
 						+ p.getPurchaseDate() + "', '" + p2.getSpecifications() + "', '" + p2.getBrand() + "')";
 				statement.executeUpdate(sql);
+				int idp = searchIdProduct(p);
+				int idu = searchIdUserProduct(p);
+				sql = "INSERT INTO products_ar(music_id, electronic_id, movie_id)"
+						+"VALUES('NULL', '"+idp+"', 'NULL', "+idu+"')";
+				statement.executeUpdate(sql);
 			} else {
 				Movie p2 = (Movie) p;
 				String sql = "INSERT INTO movie_ar(name, description, image, price, rate, stock_counter, purchase_date, duration, trailer) "
 						+ "VALUES ('" + p.getName() + "', '" + p.getDescription() + "', '" + p.getImage() + "', '"
 						+ p.getPrice() + "', '" + p.getRate() + "', '" + p.getStockCounter() + "', '"
 						+ p.getPurchaseDate() + "', '" + p2.getDuration() + "', '" + p2.getTrailer() + "')";
+				statement.executeUpdate(sql);
+				int idp = searchIdProduct(p);
+				int idu = searchIdUserProduct(p);
+				sql = "INSERT INTO products_ar(music_id, electronic_id, movie_id)"
+					+"VALUES('NULL', 'NULL', '"+idp+"', "+idu+"')";
 				statement.executeUpdate(sql);
 			}
 
@@ -309,6 +324,33 @@ public class daoModelImpl implements daoModel {
 				id = rs.getInt("seller_id");
 			}
 			statement.close();
+		} catch (SQLException e) {
+			System.err.println("SQLState: " + ((SQLException) e).getSQLState());
+			System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
+			System.err.println(e.getMessage());
+		}
+		return id;
+	}
+	public int searchIdUserProduct(Product p) throws Exception{
+		int id = 0;
+		int idp = searchIdProduct(p);
+		try{
+			statement = connect.getConnection().createStatement();
+			if(p instanceof Music){
+				String sql = "SELECT product_id FROM products_ar WHERE music_id='" + idp + "'";
+				ResultSet rs = statement.executeQuery(sql);
+				rs.next();
+				id = rs.getInt("music_id");
+			}else if(p instanceof Electronic){
+				String sql = "SELECT product_id FROM products_ar WHERE electronic_id='" + idp + "'";
+				ResultSet rs = statement.executeQuery(sql);
+				id = rs.getInt("electronic_id");
+			}else if (p instanceof Movie){
+				String sql = "SELECT product_id FROM products_ar WHERE movie_id='" + idp + "'";
+				ResultSet rs = statement.executeQuery(sql);
+				id = rs.getInt("movie_id");
+			}
+			
 		} catch (SQLException e) {
 			System.err.println("SQLState: " + ((SQLException) e).getSQLState());
 			System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
@@ -477,10 +519,7 @@ public class daoModelImpl implements daoModel {
 						i = i + 1;
 					}
 					rate = rate / i;
-					Product p = new Music(rs2.getString("name"), rs2.getString("description"),
-							(Image) rs2.getString("image"), Double.parseDouble(rs2.getString("price")), rate, reviews,
-							ratings, Integer.parseInt(rs2.getString("stock_counter")), rs2.getString("purchase_date"),
-							rs2.getString("author"), rs2.getString("album_name"));
+					Product p = new Music(rs2.getString("name"), rs2.getString("description"), rs2.getString("image"), rs2.getInt("price"), rs2.getInt("rate"), rs2.getInt("stock_counter"), rs2.getString("purchase_date"), rs2.getString("author"), rs2.getString("album_name"));
 					products.add(p);
 				}
 			}
@@ -508,10 +547,7 @@ public class daoModelImpl implements daoModel {
 						i = i + 1;
 					}
 					rate = rate / i;
-					Product p = new Electronic(rs2.getString("name"), rs2.getString("description"),
-							(Image) rs2.getString("image"), Double.parseDouble(rs2.getString("price")), rate, reviews,
-							ratings, Integer.parseInt(rs2.getString("stock_counter")), rs2.getString("purchase_date"),
-							rs2.getString("specifications"), rs2.getString("brand"));
+					Product p = new Electronic(rs2.getString("name"), rs2.getString("description"), rs2.getString("image"), rs2.getInt("price"), rs2.getInt("rate"), rs2.getInt("stock_counter"), rs2.getString("purchase_date"), rs2.getString("brand"), rs2.getString("specifications"));
 					products.add(p);
 				}
 
@@ -539,10 +575,7 @@ public class daoModelImpl implements daoModel {
 						i = i + 1;
 					}
 					rate = rate / i;
-					Product p = new Music(rs2.getString("name"), rs2.getString("description"),
-							(Image) rs2.getString("image"), Double.parseDouble(rs2.getString("price")), rate, reviews,
-							ratings, Integer.parseInt(rs2.getString("stock_counter")), rs2.getString("purchase_date"),
-							rs2.getString("duration"), rs2.getString("trailer"));
+					Product p = new Movie(rs2.getString("name"), rs2.getString("description"), rs2.getString("image"), rs2.getInt("price"), rs2.getInt("rate"), rs2.getInt("stock_counter"), rs2.getString("purchase_date"), rs2.getString("duration"), rs2.getString("trailer"));
 					products.add(p);
 				}
 			}
@@ -597,7 +630,82 @@ public class daoModelImpl implements daoModel {
 					System.out.println(rs.getString("name"));
 				}
 				break;
+			case "products_ar":
+				sql = "SELECT * FROM products_ar";
+				rs = statement.executeQuery(sql);
+				while (rs.next()) {
+					System.out.println("PID:" + rs.getString("product_id"));
+					System.out.println("MUID:" + rs.getString("music_id"));
+					System.out.println("ELID:" + rs.getString("electronic_id"));
+					System.out.println("MOID:" + rs.getString("movie_id"));
+				}
+				break;
+			case "orders_ar":
+				sql = "SELECT * FROM orders_ar";
+				rs = statement.executeQuery(sql);
+				while (rs.next()) {
+					System.out.println("CID:" + rs.getString("customer_id"));
+					System.out.println("OID:" + rs.getString("order_id"));
+				}
+				break;	
+			case "productlist_ar":
+				sql = "SELECT * FROM product_list_ar";
+				rs = statement.executeQuery(sql);
+				while (rs.next()) {
+					System.out.println("SID:" + rs.getString("seller_id"));
+					System.out.println("PID:" + rs.getString("product_id"));
+				}
+				break;
+			case "musicreview_ar":
+				sql = "SELECT * FROM musicreview_ar";
+				rs = statement.executeQuery(sql);
+				while (rs.next()) {
+					System.out.println("SID:" + rs.getString("music_id"));
+					System.out.println("PID:" + rs.getString("reviewm_id"));
+				}
+				break;
+			case "electronicreview_ar":
+				sql = "SELECT * FROM musicreview_ar";
+				rs = statement.executeQuery(sql);
+				while (rs.next()) {
+					System.out.println("SID:" + rs.getString("electronic_id"));
+					System.out.println("PID:" + rs.getString("reviewe_id"));
+				}
+				break;
+			case "moviereview_ar":
+				sql = "SELECT * FROM moviereview_ar";
+				rs = statement.executeQuery(sql);
+				while (rs.next()) {
+					System.out.println("SID:" + rs.getString("movie_id"));
+					System.out.println("PID:" + rs.getString("reviewmov_id"));
+				}
+				break;
+			case "ratemusic_ar":
+				sql = "SELECT * FROM ratemusic_ar";
+				rs = statement.executeQuery(sql);
+				while (rs.next()) {
+					System.out.println("SID:" + rs.getString("music_id"));
+					System.out.println("PID:" + rs.getString("ratem_id"));
+				}
+				break;
+			case "rateelectronic_ar":
+				sql = "SELECT * FROM rateelectronic_ar";
+				rs = statement.executeQuery(sql);
+				while (rs.next()) {
+					System.out.println("SID:" + rs.getString("electronic_id"));
+					System.out.println("PID:" + rs.getString("ratee_id"));
+				}
+				break;
+			case "ratemovie_ar":
+				sql = "SELECT * FROM ratemovie_ar";
+				rs = statement.executeQuery(sql);
+				while (rs.next()) {
+					System.out.println("SID:" + rs.getString("movie_id"));
+					System.out.println("PID:" + rs.getString("ratemo_id"));
+				}
+				break;
 			}
+				
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());

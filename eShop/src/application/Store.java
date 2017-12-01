@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import Model.Connector;
+import Model.LoginManager;
 import Model.daoModel;
 import java.util.ArrayList;
 import javafx.application.Application;
@@ -17,11 +19,12 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import Model.LoginManager;
+
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
+import java.sql.SQLException;
+import java.sql.Statement;
 public class Store extends Application implements View {
 	private List<User> users = new ArrayList<User>();
 	private User user;
@@ -43,6 +46,10 @@ public class Store extends Application implements View {
 			User s = new Seller("Tere", "OT", false, 0);
 			// dao.insertUser(s);
 			// dao.deleteUser(s);
+			Connector connect = new Connector();
+			Statement statement = connect.getConnection().createStatement();
+			String sql = "ALTER TABLE products_ar ADD seller_id INTEGER, ADD FOREIGN KEY(seller_id) REFERENCES sellers_ar(seller_id)";
+			statement.executeUpdate(sql);
 			dao.showTable("sellers_ar");
 
 
