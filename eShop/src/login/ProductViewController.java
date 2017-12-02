@@ -1,5 +1,9 @@
 package login;
 
+import application.Electronic;
+import application.Movie;
+import application.Music;
+import application.Product;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -35,14 +39,37 @@ public class ProductViewController {
 	@FXML
 	private ListView reviewsList;
 
-	public void userInteraction(final Model.LoginManager loginManager, String username) {
+	public void userInteraction(final Model.LoginManager loginManager, String username, Product p) {
 			
 			//Setting values in the view from the database
 			usernameLabel.setText("Welcome back "+ username +"!");
+			nameLabel.setText(p.getName());
+			desLabel.setText(p.getDescription());
+			stockLabel.setText(Integer.toString(p.getStockCounter()));
+			rateLabel.setText(Double.toString(p.getRate()));
+			priceLabel.setText(Double.toString(p.getPrice()));
+			
+			if (p instanceof Music){
+				specific1Label.setText(((Music) p).getAlbumName());
+				specific2Label.setText(((Music) p).getAuthor());
+			}else if(p instanceof Electronic){
+				specific1Label.setText(((Electronic) p).getSpecifications());
+				specific2Label.setText(((Electronic) p).getBrand());
+			}else if(p instanceof Movie){
+				specific1Label.setText(((Movie) p).getDuration());
+				specific2Label.setText(((Movie) p).getTrailer());
+			}
+				
 			
 			//Actions triggered in the view
-			mainViewButton.setOnAction(e -> loginManager.showMainView(username));
+			mainViewButton.setOnAction(e -> {
+				try {
+					loginManager.showMainView(username);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			});
 			logoutButton.setOnAction(e -> loginManager.logout());
-	
+			
 	}
 }

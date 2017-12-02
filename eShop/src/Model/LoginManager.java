@@ -2,6 +2,8 @@ package Model;
 
 import java.io.IOException;
 import java.util.logging.*;
+
+import application.Product;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import login.LoginController;
@@ -19,8 +21,9 @@ public class LoginManager {
 	/**
 	 * Callback method invoked to notify that a user has been authenticated.
 	 * Will show the main application screen.
+	 * @throws Exception 
 	 */
-	public void authenticated(String username) {
+	public void authenticated(String username) throws Exception {
 		showMainView(username);
 	}
 
@@ -43,7 +46,7 @@ public class LoginManager {
 		}
 	}
 
-	public void showMainView(String username) {
+	public void showMainView(String username) throws Exception {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("mainview.fxml"));
 			scene.setRoot((Parent) loader.load());
@@ -54,12 +57,12 @@ public class LoginManager {
 		}
 	}
 	
-	public void showProduct(String username) {
+	public void showProduct(String username, Product p) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("productView.fxml"));
 			scene.setRoot((Parent) loader.load());
 			ProductViewController controller = loader.<ProductViewController>getController();
-			controller.userInteraction(this,username);
+			controller.userInteraction(this,username, p);
 		} catch (IOException ex) {
 			Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
 		}

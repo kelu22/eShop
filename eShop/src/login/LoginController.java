@@ -53,7 +53,12 @@ public class LoginController {
 			if (username != null) {
 				//Launch main View
 				//loginManager.authenticated(sessionID);
-				loginManager.authenticated(username);
+				try {
+					loginManager.authenticated(username);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 
