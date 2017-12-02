@@ -35,5 +35,7 @@ public interface daoModel {
 	public List<Product> getProducts() throws Exception;
 
 	public void showTable(String nametable) throws Exception;
+	
+	public List<Product> searchProductbyName(String name) throws Exception;
 
 }

@@ -46,13 +46,7 @@ public class Store extends Application implements View {
 			User s = new Seller("Tere", "OT", false, 0);
 			// dao.insertUser(s);
 			// dao.deleteUser(s);
-			Connector connect = new Connector();
-			Statement statement = connect.getConnection().createStatement();
-			String sql = "ALTER TABLE products_ar ADD seller_id INTEGER, ADD FOREIGN KEY(seller_id) REFERENCES sellers_ar(seller_id)";
-			statement.executeUpdate(sql);
 			dao.showTable("sellers_ar");
-
-
 		} catch (SQLException e) {
 			System.err.println("SQLState: " + ((SQLException) e).getSQLState());
 

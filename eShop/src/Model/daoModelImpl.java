@@ -705,10 +705,46 @@ public class daoModelImpl implements daoModel {
 				}
 				break;
 			}
-				
+				statement.close();
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
+	}
+
+	@Override
+	public List<Product> searchProductbyName(String name) throws Exception {
+		ResultSet rs;
+		String sql;
+		List<Product> products = new ArrayList<>();
+		try {
+			statement = connect.getConnection().createStatement();
+			sql = "SELECT * FROM music_ar WHERE name LIKE '%"+name+"%'";
+			rs = statement.executeQuery(sql);
+			while(rs.next()){
+				Product p = new Music(rs.getString("name"), rs.getString("description"), rs.getString("image"), rs.getInt("price"), rs.getInt("rate"), rs.getInt("stock_counter"), rs.getString("purchase_date"), rs.getString("author"), rs.getString("album_name"));
+				products.add(p);
+			}
+			sql = "SELECT * FROM electronic_ar WHERE name LIKE '%"+name+"%'";
+			rs = statement.executeQuery(sql);
+			while(rs.next()){
+				Product p = new Electronic(rs.getString("name"), rs.getString("description"), rs.getString("image"), rs.getInt("price"), rs.getInt("rate"), rs.getInt("stock_counter"), rs.getString("purchase_date"), rs.getString("specifications"), rs.getString("brand"));
+				products.add(p);
+			}
+			sql = "SELECT * FROM movie_ar WHERE name LIKE '%"+name+"%'";
+			rs = statement.executeQuery(sql);
+			while(rs.next()){
+				Product p = new Movie(rs.getString("name"), rs.getString("description"), rs.getString("image"), rs.getInt("price"), rs.getInt("rate"), rs.getInt("stock_counter"), rs.getString("purchase_date"), rs.getString("duration"), rs.getString("trailer"));
+				products.add(p);
+			}
+			return products;
+		}
+		catch (SQLException e) {
+			System.err.println("SQLState: " + ((SQLException) e).getSQLState());
+			System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
+			System.err.println(e.getMessage());
+		}
+		statement.close();
+		return null;
 	}
 }
