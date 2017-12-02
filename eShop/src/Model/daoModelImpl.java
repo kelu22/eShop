@@ -72,7 +72,7 @@ public class daoModelImpl implements daoModel {
 					+ " PRIMARY KEY (product_id), " + " music_id INTEGER, " + " electronic_id INTEGER, "
 					+ " movie_id INTEGER, "  + " seller_id INTEGER, "+" FOREIGN KEY (music_id) REFERENCES music_ar(music_id), "
 					+ " FOREIGN KEY (electronic_id) REFERENCES electronic_ar(electronic_id), "
-					+ " FOREIGN KEY (movie_id) REFERENCES movie_ar(movie_id),"+" FOREIGN KEY(seller_id) REFERENCES sellers_ar(seller_id) " + ")";
+					+ " FOREIGN KEY (movie_id) REFERENCES movie_ar(movie_id),"+" FOREIGN KEY(seller_id) REFERENCES sellers_ar(seller_id), " + "PRIMARY KEY ( product_id ))";
 			statement.executeUpdate(sql);
 
 			/**
