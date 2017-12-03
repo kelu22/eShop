@@ -13,8 +13,8 @@
       <HBox prefHeight="55.0" prefWidth="636.0" spacing="15.0">
          <children>
             <Label fx:id="usernameLabel" prefHeight="27.0" prefWidth="168.0" text="Welcome back username!" />
-            <TextField prefHeight="24.0" prefWidth="251.0" promptText="Search..." />
-            <Button mnemonicParsing="false" text="My cart" />
+            <TextField id="searchBar" prefHeight="24.0" prefWidth="251.0" promptText="Search..." />
+            <Button id="cartButton" mnemonicParsing="false" text="My cart" />
             <Button fx:id="logoutButton" mnemonicParsing="false" text="Log out" />
          </children>
          <padding>
@@ -23,7 +23,7 @@
       </HBox>
       <StackPane prefHeight="50.0" prefWidth="630.0">
          <children>
-            <Button mnemonicParsing="false" text="Movies" />
+            <Button id="moviesButton" mnemonicParsing="false" text="Movies" />
          </children>
          <padding>
             <Insets bottom="10.0" top="10.0" />
@@ -80,7 +80,7 @@
       </HBox>
       <StackPane prefHeight="36.0" prefWidth="628.0">
          <children>
-            <Button mnemonicParsing="false" text="Music" />
+            <Button id="musicButton" mnemonicParsing="false" text="Music" />
          </children>
          <padding>
             <Insets bottom="10.0" top="10.0" />
@@ -137,7 +137,7 @@
       </HBox>
       <StackPane prefHeight="38.0" prefWidth="629.0">
          <children>
-            <Button mnemonicParsing="false" text="Electronic" />
+            <Button id="electronicButton" mnemonicParsing="false" text="Electronic" />
          </children>
          <padding>
             <Insets bottom="10.0" top="10.0" />

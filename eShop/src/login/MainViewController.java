@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import Model.LoginManager;
 import Model.daoModel;
 import Model.daoModelImpl;
 import application.Electronic;
@@ -16,6 +17,7 @@ import application.Product;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -25,6 +27,14 @@ public class MainViewController {
 
 	@FXML
 	private Button logoutButton;
+	@FXML
+	private Button moviesButton;
+	@FXML
+	private Button musicButton;
+	@FXML
+	private Button electronicButton;
+	@FXML
+	private Button cartButton;
 	@FXML
 	private Label usernameLabel;
 	@FXML
@@ -63,7 +73,8 @@ public class MainViewController {
 	private Label lelec2;
 	@FXML
 	private Label lelec3;
-
+	@FXML
+	private TextField searchBar;
 	
 	
 	public void userInteraction(final Model.LoginManager loginManager, String username) throws Exception {
@@ -128,6 +139,14 @@ public class MainViewController {
 		lelec3.setText(arr1[2].getName());
 		
 		//Actions triggered in the view
+		//Search bar redirect to productListView
+		searchBar.setOnInputMethodTextChanged(e -> {
+			try {
+				searchProductName(loginManager, searchBar.getText());
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		});
 		logoutButton.setOnAction(e -> loginManager.logout());
 		imovie1.setOnMouseClicked(e -> loginManager.showProduct(username,arr[0]));
 		imovie2.setOnMouseClicked(e -> loginManager.showProduct(username,arr[1]));
@@ -139,5 +158,13 @@ public class MainViewController {
 		ielec2.setOnMouseClicked(e -> loginManager.showProduct(username, arr2[1]));
 		ielec3.setOnMouseClicked(e -> loginManager.showProduct(username, arr2[2]));
 		
+	}
+	
+	public void searchProductName (final Model.LoginManager loginManager, String search) throws Exception{
+		//Filter by name
+		daoModel dao = new daoModelImpl();
+		List<Product> products = new ArrayList<Product>(dao.searchProductbyName(search));
+		//Return that ArrayList to the view
+		loginManager.showProductListView(products);
 	}
 }

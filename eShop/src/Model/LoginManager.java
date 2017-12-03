@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.*;
 
 import application.Product;
@@ -56,13 +57,24 @@ public class LoginManager {
 			Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-	
+		
 	public void showProduct(String username, Product p) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("productView.fxml"));
 			scene.setRoot((Parent) loader.load());
 			ProductViewController controller = loader.<ProductViewController>getController();
 			controller.userInteraction(this,username, p);
+		} catch (IOException ex) {
+			Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+	
+	public void showProductListView(List<Product> productsList){
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("productList.fxml"));
+			scene.setRoot((Parent) loader.load());
+			ProductViewController controller = loader.<ProductViewController>getController();
+			//controller.userInteraction(this,username, p);
 		} catch (IOException ex) {
 			Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
 		}
