@@ -79,10 +79,25 @@ public class MainViewController {
 	
 	public void userInteraction(final Model.LoginManager loginManager, String username) throws Exception {
 		daoModel dao = new daoModelImpl();
+		List<Product> products = new ArrayList<Product>(dao.getProducts());
+		List<Product> moviesProducts = new ArrayList<Product>();
+		List<Product> musicProducts = new ArrayList<Product>();
+		List<Product> electronicProducts = new ArrayList<Product>();
+		
+		//Divide in categories for the prodcutListView
+		for (Product p: products){
+			if (p instanceof Movie){
+				moviesProducts.add(p);
+			}else if (p instanceof Music){
+				musicProducts.add(p);
+			}else if (p instanceof Electronic){
+				electronicProducts.add(p);
+			}
+		}
 		
 		//Setting values in the view from the database
 		usernameLabel.setText("Welcome back "+ username +"!");
-		List<Product> products = new ArrayList<Product>(dao.getProducts());
+		
 		Music[] arr = new Music[2];
 		Electronic[] arr1 = new Electronic[2];
 		Movie[] arr2 = new Movie[2];
@@ -147,6 +162,10 @@ public class MainViewController {
 				e1.printStackTrace();
 			}
 		});
+		
+		moviesButton.setOnAction(e -> loginManager.showProductListView(moviesProducts));
+		musicButton.setOnAction(e -> loginManager.showProductListView(musicProducts));
+		electronicButton.setOnAction(e -> loginManager.showProductListView(electronicProducts));
 		logoutButton.setOnAction(e -> loginManager.logout());
 		imovie1.setOnMouseClicked(e -> loginManager.showProduct(username,arr[0]));
 		imovie2.setOnMouseClicked(e -> loginManager.showProduct(username,arr[1]));
