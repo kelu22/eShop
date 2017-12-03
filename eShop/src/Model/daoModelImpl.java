@@ -457,7 +457,7 @@ public class daoModelImpl implements daoModel {
 			if (p instanceof Music) {
 				String sql = "DELETE FROM music_ar WHERE music_id = " + id;
 				statement.executeUpdate(sql);
-				sql = "DELETE FROM product_ar WHERE music_id = " + id;
+				sql = "DELETE FROM products_ar WHERE music_id = " + id;
 				statement.executeUpdate(sql);
 				sql = "DELETE FROM musicreview_ar WHERE music_id = " + id;
 				statement.executeUpdate(sql);
@@ -467,7 +467,7 @@ public class daoModelImpl implements daoModel {
 			} else if (p instanceof Electronic) {
 				String sql = "DELETE FROM electronic_ar WHERE electronic_id = " + id;
 				statement.executeUpdate(sql);
-				sql = "DELETE FROM product_ar WHERE electronic_id = " + id;
+				sql = "DELETE FROM products_ar WHERE electronic_id = " + id;
 				statement.executeUpdate(sql);
 				sql = "DELETE FROM electronicreview_ar WHERE electronic_id = " + id;
 				statement.executeUpdate(sql);
@@ -476,7 +476,7 @@ public class daoModelImpl implements daoModel {
 			} else {
 				String sql = "DELETE FROM movie_ar WHERE movie_id = " + id;
 				statement.executeUpdate(sql);
-				sql = "DELETE FROM product_ar WHERE movie_id = " + id;
+				sql = "DELETE FROM products_ar WHERE movie_id = " + id;
 				statement.executeUpdate(sql);
 				sql = "DELETE FROM moviereview_ar WHERE movie_id = " + id;
 				statement.executeUpdate(sql);
@@ -495,7 +495,7 @@ public class daoModelImpl implements daoModel {
 		List<Product> products = new ArrayList<>();
 		try {
 			statement = connect.getConnection().createStatement();
-			String sql = "SELECT music_id IS not NULL FROM product_ar";
+			String sql = "SELECT music_id IS not NULL FROM products_ar";
 			ResultSet rs = statement.executeQuery(sql);
 			Double rate = 0.0;
 			int i = 0;
@@ -525,7 +525,7 @@ public class daoModelImpl implements daoModel {
 			}
 			i = 0;
 			rate = 0.0;
-			sql = "SELECT electronic_id IS NOT NULL FROM product_ar";
+			sql = "SELECT electronic_id IS NOT NULL FROM products_ar";
 			rs = statement.executeQuery(sql);
 			while (rs.next()) {
 				sql = "SELECT * FROM electronic_ar WHERE electronic_id = " + rs.getString("electronic_id");
@@ -554,7 +554,7 @@ public class daoModelImpl implements daoModel {
 			}
 			i = 0;
 			rate = 0.0;
-			sql = "SELECT movie_id IS NOT NULL FROM product_ar";
+			sql = "SELECT movie_id IS NOT NULL FROM products_ar";
 			rs = statement.executeQuery(sql);
 			while (rs.next()) {
 				sql = "SELECT * FROM movie_ar WERE movie_id = " + rs.getString("movie_id");
