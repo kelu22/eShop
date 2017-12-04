@@ -10,7 +10,7 @@ public class Electronic extends Product {
 	private String specifications;
 	private String brand;
 
-	public Electronic(String name, String description, String image, double price, double rate, int stockCounter, String purchaseDate, String specifications, String Brand) {
+	public Electronic(String name, String description, String image, double price, double rate, int stockCounter, String purchaseDate, String specifications, String brand) {
 		super(name, description, image, price, rate, stockCounter, purchaseDate);
 		this.specifications = specifications;
 		this.brand = brand;

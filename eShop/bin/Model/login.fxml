@@ -29,8 +29,8 @@
               <children>
                 <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="104.0" text="Username:" />
                 <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="101.0" text="Password:" GridPane.rowIndex="1" />
-                <TextField fx:id="user" promptText="Your username..." GridPane.columnIndex="1" />
-                <TextField fx:id="password" promptText="Your password..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="user" text="arturo" GridPane.columnIndex="1" />
+                <TextField fx:id="password" text="wapa" GridPane.columnIndex="1" GridPane.rowIndex="1" />
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="148.0" minWidth="10.0" prefWidth="109.0" />

@@ -12,9 +12,11 @@ public interface daoModel {
 
 	public void insertUser(User u) throws Exception;
 
-	public void insertProduct(Product p) throws Exception;
+	public void insertProduct(Product p, User u) throws Exception;
 
 	public void insertRating(double rate, Product p) throws Exception;
+	
+	public List<Product> getCart(User u) throws Exception;
 
 	public void insertOrder(Product p, User u) throws Exception;
 

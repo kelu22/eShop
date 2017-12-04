@@ -1,4 +1,4 @@
-package login;
+package Controller;
 
 import javafx.event.Event;
 
@@ -14,6 +14,7 @@ import application.Electronic;
 import application.Movie;
 import application.Music;
 import application.Product;
+import application.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -77,30 +78,34 @@ public class MainViewController {
 	private TextField searchBar;
 	
 	
-	public void userInteraction(final Model.LoginManager loginManager, String username) throws Exception {
+	public void userInteraction(final Model.LoginManager loginManager, String username, User session) throws Exception {
 		daoModel dao = new daoModelImpl();
+		System.out.println("My userpass:" + session.getPassword());
 		List<Product> products = new ArrayList<Product>(dao.getProducts());
+		List<Product> myProducts = new ArrayList<Product>(dao.getCart(session));
 		List<Product> moviesProducts = new ArrayList<Product>();
 		List<Product> musicProducts = new ArrayList<Product>();
 		List<Product> electronicProducts = new ArrayList<Product>();
 		
-		//Divide in categories for the prodcutListView
+		//Divide in categories for the productListView
 		for (Product p: products){
 			if (p instanceof Movie){
 				moviesProducts.add(p);
+				
 			}else if (p instanceof Music){
 				musicProducts.add(p);
+				
 			}else if (p instanceof Electronic){
 				electronicProducts.add(p);
+				
 			}
 		}
-		
 		//Setting values in the view from the database
 		usernameLabel.setText("Welcome back "+ username +"!");
 		
-		Music[] arr = new Music[2];
-		Electronic[] arr1 = new Electronic[2];
-		Movie[] arr2 = new Movie[2];
+		Music[] arr = new Music[3];
+		Electronic[] arr1 = new Electronic[3];
+		Movie[] arr2 = new Movie[3];
 		int cont = 0; int cont1= 0; int cont2=0;
 		for(Product p: products){
 			if ((p instanceof Music)&&cont<3){
@@ -117,7 +122,7 @@ public class MainViewController {
 				break;
 			}
 		}
-		Path[] path = new Path[8];
+//		Path[] path = new Path[8];
 		
 //		for(int i = 0; i<path.length; i++){
 //			if(i<3 && i>=0){
@@ -129,6 +134,23 @@ public class MainViewController {
 //			}		
 //		}
 		
+		
+		lmusic1.setText(arr[0].getName());
+		lmusic2.setText(arr[1].getName());
+		lmusic3.setText(arr[2].getName());
+		
+		lelec1.setText(arr1[0].getName());
+		lelec2.setText(arr1[1].getName());
+		lelec3.setText(arr1[2].getName());
+		
+		lmovie1.setText(arr2[0].getName());
+		lmovie2.setText(arr2[1].getName());
+		lmovie3.setText(arr2[2].getName());
+		
+		imovie1.setImage(new Image(arr2[0].getImage()));
+		imovie2.setImage(new Image(arr2[1].getImage()));
+		imovie3.setImage(new Image(arr2[2].getImage()));
+		
 		imusic1.setImage(new Image(arr[0].getImage()));
 		imusic2.setImage(new Image(arr[1].getImage()));
 		imusic3.setImage(new Image(arr[2].getImage()));
@@ -137,53 +159,50 @@ public class MainViewController {
 		ielec2.setImage(new Image(arr1[1].getImage()));
 		ielec3.setImage(new Image(arr1[2].getImage()));
 		
-		imovie1.setImage(new Image(arr2[0].getImage()));
-		imovie2.setImage(new Image(arr2[1].getImage()));
-		imovie3.setImage(new Image(arr2[2].getImage()));
-		
-		lmusic1.setText(arr[0].getName());
-		lmusic2.setText(arr[1].getName());
-		lmusic3.setText(arr[2].getName());
-		
-		lmovie1.setText(arr2[0].getName());
-		lmovie2.setText(arr2[1].getName());
-		lmovie3.setText(arr2[2].getName());
-		
-		lelec1.setText(arr1[0].getName());
-		lelec2.setText(arr1[1].getName());
-		lelec3.setText(arr1[2].getName());
 		
 		//Actions triggered in the view
 		//Search bar redirect to productListView
 		searchBar.setOnInputMethodTextChanged(e -> {
 			try {
-				searchProductName(loginManager, searchBar.getText());
+				searchProductName(loginManager, searchBar.getText(), username, session);
+				
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		});
 		
-		moviesButton.setOnAction(e -> loginManager.showProductListView(moviesProducts));
-		musicButton.setOnAction(e -> loginManager.showProductListView(musicProducts));
-		electronicButton.setOnAction(e -> loginManager.showProductListView(electronicProducts));
+		
+		cartButton.setOnAction(e -> loginManager.showProductListView(myProducts,username,session));
+		moviesButton.setOnAction(e -> loginManager.showProductListView(moviesProducts,username,session));
+		musicButton.setOnAction(e -> loginManager.showProductListView(musicProducts,username,session));
+		electronicButton.setOnAction(e -> loginManager.showProductListView(electronicProducts,username,session));
 		logoutButton.setOnAction(e -> loginManager.logout());
-		imovie1.setOnMouseClicked(e -> loginManager.showProduct(username,arr[0]));
-		imovie2.setOnMouseClicked(e -> loginManager.showProduct(username,arr[1]));
-		imovie3.setOnMouseClicked(e -> loginManager.showProduct(username,arr[2]));
-		imusic1.setOnMouseClicked(e -> loginManager.showProduct(username, arr1[0]));
-		imusic2.setOnMouseClicked(e -> loginManager.showProduct(username, arr1[1]));
-		imusic3.setOnMouseClicked(e -> loginManager.showProduct(username, arr1[2]));
-		ielec1.setOnMouseClicked(e -> loginManager.showProduct(username, arr2[0]));
-		ielec2.setOnMouseClicked(e -> loginManager.showProduct(username, arr2[1]));
-		ielec3.setOnMouseClicked(e -> loginManager.showProduct(username, arr2[2]));
+		imovie1.setOnMouseClicked(e -> loginManager.showProduct(username,arr2[0], session));
+		
+		imovie2.setOnMouseClicked(e -> loginManager.showProduct(username,arr2[1], session));
+		
+		imovie3.setOnMouseClicked(e -> loginManager.showProduct(username,arr2[2], session));
+		
+		imusic1.setOnMouseClicked(e -> loginManager.showProduct(username, arr[0], session));
+		
+		imusic2.setOnMouseClicked(e -> loginManager.showProduct(username, arr[1], session));
+		
+		imusic3.setOnMouseClicked(e -> loginManager.showProduct(username, arr[2], session));
+		
+		ielec1.setOnMouseClicked(e -> loginManager.showProduct(username, arr1[0], session));
+		
+		ielec2.setOnMouseClicked(e -> loginManager.showProduct(username, arr1[1], session));
+		
+		ielec3.setOnMouseClicked(e -> loginManager.showProduct(username, arr1[2], session));
+		
 		
 	}
 	
-	public void searchProductName (final Model.LoginManager loginManager, String search) throws Exception{
+	public void searchProductName (final Model.LoginManager loginManager, String search, String username, User session) throws Exception{
 		//Filter by name
 		daoModel dao = new daoModelImpl();
 		List<Product> products = new ArrayList<Product>(dao.searchProductbyName(search));
 		//Return that ArrayList to the view
-		loginManager.showProductListView(products);
+		loginManager.showProductListView (products,username, session);
 	}
 }
