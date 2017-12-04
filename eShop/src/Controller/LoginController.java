@@ -19,6 +19,8 @@ import application.Seller;
 import application.User;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 /**
  * 
  * @author arturopavon and raquelnoblejas
@@ -41,6 +43,8 @@ public class LoginController {
 	private Button registerButton;
 	@FXML
 	private CheckBox checkBox;
+	@FXML
+	private ImageView logo;
 
 	private boolean isSeller = false;
 	String sessionID = null;
@@ -53,6 +57,7 @@ public class LoginController {
 		 * Method to see if the user has been registered or not
 		 *
 		 */
+		logo.setImage(new Image("file:Images/logo2.jpg"));
 		loginButton.setOnAction((event) -> {
 			try {
 				session = authorize();

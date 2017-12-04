@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.effect.*?>
 <?import java.net.*?>
@@ -10,11 +11,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.LoginController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
   <children>
-    <StackPane prefHeight="267.0" prefWidth="328.0">
+    <StackPane prefHeight="693.0" prefWidth="630.0">
       <children>
-        <VBox prefHeight="614.0" prefWidth="611.0" spacing="10.0" StackPane.alignment="CENTER">
+        <VBox prefHeight="581.0" prefWidth="582.0" spacing="10.0" StackPane.alignment="CENTER">
           <children>
                   <StackPane prefHeight="150.0" prefWidth="200.0">
                      <children>
@@ -25,6 +26,11 @@
                         </Label>
                      </children>
                   </StackPane>
+                  <ImageView fx:id="logo" fitHeight="197.0" fitWidth="284.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets left="170.0" />
+                     </VBox.margin>
+                  </ImageView>
             <GridPane alignment="CENTER" prefHeight="120.0" prefWidth="684.0">
               <children>
                 <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="104.0" text="Username:" />
