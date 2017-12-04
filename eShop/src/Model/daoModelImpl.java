@@ -14,22 +14,29 @@ import application.Product;
 import application.Customer;
 import application.Seller;
 import application.User;
-
+/**
+ * 
+ * @author arturopavon and raquelnoblejas
+ *
+ */
 public class daoModelImpl implements daoModel {
+	
+	/**
+	 * 
+	 * Variables to handle connection with the DB
+	 *
+	 */
+	
 	Connector connect = new Connector();
 	private Statement statement = null;
 
 	/**
-	 * Method to create the database with the fields of: Primary key: pid ID to
-	 * identify Income Pep
 	 * 
-	 * @throws Exception
-	 * @throws SQLException
+	 * Method to create all the tables needed and described in the ERD in the document
+	 *
 	 */
-
 	public void createTables() throws Exception, SQLException {
 		try {
-			System.out.println("He entrado");
 			statement = connect.getConnection().createStatement();
 			/**
 			 * Creation of user-related tables
@@ -134,20 +141,23 @@ public class daoModelImpl implements daoModel {
 			statement.executeUpdate(sql);
 
 			statement.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		}catch (SQLException e) {
+				System.err.println("SQLState: " + ((SQLException) e).getSQLState());
+				System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
+				System.err.println(e.getMessage());
+
+			}
 
 	}
 
 	/**
-	 * Method to insert all the data in the DB
+	 * Method to insert user in the DB
 	 * 
-	 * @param robjs¡
-	 * @throws Exception
+	 * @param User
+	 * @throws SQLException, Exception
 	 */
 
-	public void insertUser(User u) throws Exception {
+	public void insertUser(User u) throws Exception, SQLException {
 		try {
 
 			statement = connect.getConnection().createStatement();
@@ -176,8 +186,14 @@ public class daoModelImpl implements daoModel {
 		}
 
 	}
-
-	public void insertProduct(Product p, User u) throws Exception {
+	/**
+	 * Method to insert products in the db
+	 * Include products in products_ar and its category
+	 * @param Product
+	 * @param User
+	 * @throws Exception
+	 */
+	public void insertProduct(Product p, User u) throws SQLException, Exception {
 		try {
 			statement = connect.getConnection().createStatement();
 			if (p instanceof Music) {
@@ -236,7 +252,13 @@ public class daoModelImpl implements daoModel {
 		}
 
 	}
-
+	/**
+	 * Method to insert ratings in the db from a product
+	 * Include products in products_ar and its category
+	 * @param Product
+	 * @param Rate
+	 * @throws SQLException, Exception
+	 */
 	public void insertRating(double rate, Product p) throws Exception {
 		try {
 			statement = connect.getConnection().createStatement();
@@ -264,7 +286,12 @@ public class daoModelImpl implements daoModel {
 			System.err.println(e.getMessage());
 		}
 	}
-
+	/**
+	 * Method to insert orders in the db from a user
+	 * @param Product
+	 * @param User
+	 * @throws SQLException, Exception
+	 */
 	public void insertOrder(Product p, User u) throws Exception {
 		try {
 			statement = connect.getConnection().createStatement();
@@ -279,8 +306,13 @@ public class daoModelImpl implements daoModel {
 			System.err.println(e.getMessage());
 		}
 	}
-
-	public void insertCart(Product p, User u) throws Exception {
+	/**
+	 * Method to insert product in the cart from user
+	 * @param Product
+	 * @param User
+	 * @throws SQLException, Exception
+	 */
+	public void insertCart(Product p, User u) throws SQLException, Exception {
 		try {
 			Statement statement2 = connect.getConnection().createStatement();
 			int id = searchIdProduct(p);
@@ -315,8 +347,13 @@ public class daoModelImpl implements daoModel {
 			System.err.println(e.getMessage());
 		}
 	}
-	
-	public List<Product> getCart(User u) throws Exception {
+	/**
+	 * Method to obtain the cart from the db from a user
+	 * Include products in products_ar and its category
+	 * @param User
+	 * @throws SQLException, Exception
+	 */
+	public List<Product> getCart(User u) throws SQLException, Exception {
 		
 		try {
 			if (u instanceof Customer){
@@ -366,8 +403,13 @@ public class daoModelImpl implements daoModel {
 		}
 		return null;
 	}
-	
-	public Product getProduct(int id, String type) throws Exception{
+	/**
+	 * Method to obtain a product attributes with its product_id and type
+	 * @param ID Product_id
+	 * @param Type of product
+	 * @throws SQLException, Exception
+	 */
+	public Product getProduct(int id, String type) throws SQLException, Exception{
 		Product p;
 		String sql;
 		ResultSet rs2;
@@ -403,8 +445,13 @@ public class daoModelImpl implements daoModel {
 		}
 		return null;
 	}
-	
+	/**
+	 * Method to search for a music based on id
+	 * @param Id
+	 * @throws SQLException, Exception
+	 */
 	public Product searchProductIdMusic(int id) throws SQLException, Exception{
+		try{
 		statement = connect.getConnection().createStatement();
 		String sql = "SELECT * FROM music_ar WHERE music_id ='"+id+"'";
 		ResultSet rs = statement.executeQuery(sql);
@@ -412,11 +459,21 @@ public class daoModelImpl implements daoModel {
 			Product p = new Music(rs.getString("name"), rs.getString("description"), rs.getString("image"), rs.getInt("price"), rs.getInt("rate"), rs.getInt("stock_counter"), rs.getString("purchase_date"), rs.getString("author"), rs.getString("album_name"));
 			return p;
 		}
+		}catch (SQLException e) {
+			System.err.println("SQLState: " + ((SQLException) e).getSQLState());
+			System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
+			System.err.println(e.getMessage());
+		}
 		return null;
 		
 	}
-	
+	/**
+	 * Method to search for a electronic based on id
+	 * @param Id
+	 * @throws SQLException, Exception
+	 */
 	public Product searchProductIdElectronic(int id) throws SQLException, Exception{
+		try{
 		statement = connect.getConnection().createStatement();
 		String sql = "SELECT * FROM electronic_ar WHERE electronic_id = '"+id+"'";
 		ResultSet rs = statement.executeQuery(sql);
@@ -424,11 +481,21 @@ public class daoModelImpl implements daoModel {
 			Product p = new Electronic(rs.getString("name"), rs.getString("description"), rs.getString("image"), rs.getInt("price"), rs.getInt("rate"), rs.getInt("stock_counter"), rs.getString("purchase_date"), rs.getString("specifications"), rs.getString("brand"));
 			return p;
 		}
+		}catch (SQLException e) {
+			System.err.println("SQLState: " + ((SQLException) e).getSQLState());
+			System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
+			System.err.println(e.getMessage());
+		}
 		return null;
 		
 	}
-	
+	/**
+	 * Method to search for a movie based on id
+	 * @param Id
+	 * @throws SQLException, Exception
+	 */
 	public Product searchProductIdMovie(int id) throws SQLException, Exception{
+		try{
 		statement = connect.getConnection().createStatement();
 		String sql = "SELECT * FROM movie_ar WHERE movie_id = '"+id+"'";
 		ResultSet rs = statement.executeQuery(sql);
@@ -436,11 +503,21 @@ public class daoModelImpl implements daoModel {
 			Product p = new Movie(rs.getString("name"), rs.getString("description"), rs.getString("image"), rs.getInt("price"), rs.getInt("rate"), rs.getInt("stock_counter"), rs.getString("purchase_date"), rs.getString("duration"), rs.getString("trailer"));
 			return p;
 		}
+		}catch (SQLException e) {
+			System.err.println("SQLState: " + ((SQLException) e).getSQLState());
+			System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
+			System.err.println(e.getMessage());
+		}
 		return null;
 		
 	}
-	
-	public void insertProductList(Product p, User u) throws Exception {
+	/**
+	 * Method to insert in ProductList
+	 * @param Product
+	 * @param User
+	 * @throws SQLException, Exception
+	 */
+	public void insertProductList(Product p, User u) throws SQLException, Exception {
 		try {
 			statement = connect.getConnection().createStatement();
 			int id = searchIdProduct(p);
@@ -455,9 +532,13 @@ public class daoModelImpl implements daoModel {
 			System.err.println(e.getMessage());
 		}
 	}
-
+	/**
+	 * Method return userid
+	 * @param User
+	 * @throws SQLException, Exception
+	 */
 	
-	public int returnUser(User u) throws Exception {
+	public int returnUser(User u) throws SQLException,Exception {
 		int id=0;
 		try {
 			statement = connect.getConnection().createStatement();
@@ -482,7 +563,12 @@ public class daoModelImpl implements daoModel {
 		}
 		return id;
 	}
-	public int searchIdUserProduct(Product p) throws Exception{
+	/**
+	 * Method to search iduser based in Product
+	 * @param Product
+	 * @throws SQLException, Exception
+	 */
+	public int searchIdUserProduct(Product p) throws SQLException, Exception{
 		int id = 0;
 		int idp = searchIdProduct(p);
 		System.out.println(idp);
@@ -510,7 +596,13 @@ public class daoModelImpl implements daoModel {
 		}
 		return id;
 	}
-	public int searchIdUser(User u) throws Exception {
+	
+	/**
+	 * Method to search id from user
+	 * @param User
+	 * @throws SQLException, Exception
+	 */
+	public int searchIdUser(User u) throws SQLException, Exception {
 		int id = 0;
 		System.out.println(u.getUsername());
 		try {
@@ -541,8 +633,12 @@ public class daoModelImpl implements daoModel {
 		}
 		return id;
 	}
-
-	public int searchIdProduct(Product p) throws Exception {
+	/**
+	 * Method to search id of a product
+	 * @param Product
+	 * @throws SQLException, Exception
+	 */
+	public int searchIdProduct(Product p) throws SQLException, Exception {
 		int id = 0;
 		try {
 			statement = connect.getConnection().createStatement();
@@ -576,8 +672,12 @@ public class daoModelImpl implements daoModel {
 		}
 		return id;
 	}
-
-	public void deleteUser(User u) throws Exception {
+	/**
+	 * Method to delete user
+	 * @param User
+	 * @throws SQLException, Exception
+	 */
+	public void deleteUser(User u) throws SQLException, Exception {
 		int id = searchIdUser(u);
 		try {
 			statement = connect.getConnection().createStatement();
@@ -604,8 +704,12 @@ public class daoModelImpl implements daoModel {
 		}
 
 	}
-
-	public void deleteProduct(Product p) throws Exception {
+	/**
+	 * Method to delete product from db
+	 * @param Product
+	 * @throws SQLException, Exception
+	 */
+	public void deleteProduct(Product p) throws SQLException, Exception {
 		int id = searchIdProduct(p);
 		try {
 			
@@ -649,8 +753,11 @@ public class daoModelImpl implements daoModel {
 			System.err.println(e.getMessage());
 		}
 	}
-
-	public List<Product> getProducts() throws Exception {
+	/**
+	 * Method to retrieve all the products from db with all of its characteristics
+	 * @throws SQLException, Exception
+	 */
+	public List<Product> getProducts() throws SQLException, Exception {
 		List<Product> products = new ArrayList<>();
 		try {
 			statement = connect.getConnection().createStatement();
@@ -753,7 +860,13 @@ public class daoModelImpl implements daoModel {
 	}
 
 
-
+	/**
+	 * Method to setreviews music
+	 * @param ProductList
+	 * @param ids
+	 * @param control:To keep control of the position
+	 * @throws SQLException, Exception
+	 */
 	private void setReviewsMusic(List<Product> products, int[] ids, int control) throws SQLException, Exception {
 		for(int i = 0; i<ids.length;i++){
 			String sql = "SELECT review FROM musicreview_ar WHERE music_id ='" + ids[i]+ "'";
@@ -769,7 +882,13 @@ public class daoModelImpl implements daoModel {
 			statement2.close();
 		}
 	}
-	
+	/**
+	 * Method to setreviews electronic
+	 * @param ProductList
+	 * @param ids
+	 * @param control:To keep control of the position
+	 * @throws SQLException, Exception
+	 */
 	private void setReviewsElectronic(List<Product> products, int[] ids, int control) throws SQLException, Exception {
 		for(int i = 0; i<ids.length;i++){
 			String sql = "SELECT review FROM electronicreview_ar WHERE electronic_id ='" + ids[i]+ "'";
@@ -785,6 +904,13 @@ public class daoModelImpl implements daoModel {
 			statement2.close();
 		}
 	}
+	/**
+	 * Method to setreviews movie
+	 * @param ProductList
+	 * @param ids
+	 * @param control:To keep control of the position
+	 * @throws SQLException, Exception
+	 */
 	
 	private void setReviewsMovie(List<Product> products, int[] ids, int control) throws SQLException, Exception {
 		for(int i = 0; i<ids.length;i++){
@@ -801,7 +927,13 @@ public class daoModelImpl implements daoModel {
 			statement2.close();
 		}
 	}
-
+	/**
+	 * Method to setreratings music
+	 * @param ProductList
+	 * @param ids
+	 * @param control:To keep control of the position
+	 * @throws SQLException, Exception
+	 */
 	
 	private void setRatingMusic(List<Product> products, int[] ids, int control) throws Exception {
 		for (int i = 0; i<ids.length; i++){
@@ -822,7 +954,13 @@ public class daoModelImpl implements daoModel {
 		}
 		
 	}
-	
+	/**
+	 * Method to setreviews electronic
+	 * @param ProductList
+	 * @param ids
+	 * @param control:To keep control of the position
+	 * @throws SQLException, Exception
+	 */
 	private void setRatingElectronic(List<Product> products, int[] ids, int control) throws Exception {
 		for (int i = 0; i<ids.length; i++){
 			Statement statement3 = connect.getConnection().createStatement();
@@ -842,7 +980,13 @@ public class daoModelImpl implements daoModel {
 		}
 		
 	}
-	
+	/**
+	 * Method to setreviews movie
+	 * @param ProductList
+	 * @param ids
+	 * @param control:To keep control of the position
+	 * @throws SQLException, Exception
+	 */
 	private void setRatingMovie(List<Product> products, int[] ids, int control) throws Exception {
 		for (int i = 0; i<ids.length; i++){
 			Statement statement3 = connect.getConnection().createStatement();
@@ -863,9 +1007,13 @@ public class daoModelImpl implements daoModel {
 		
 	}
 	
+	/**
+	 * Method to showtables from db to see the elements
+	 * @param Name of the table you want to see main elements
+	 * @throws SQLException, Exception
+	 */
 	
-	
-	public void showTable(String nametable) throws Exception {
+	public void showTable(String nametable) throws SQLException, Exception {
 		ResultSet rs;
 		String sql;
 		try {
@@ -987,9 +1135,13 @@ public class daoModelImpl implements daoModel {
 			System.err.println(e.getMessage());
 		}
 	}
-
+	/**
+	 * Method to search product by name
+	 * @param Name
+	 * @throws SQLException, Exception
+	 */
 	@Override
-	public List<Product> searchProductbyName(String name) throws Exception {
+	public List<Product> searchProductbyName(String name) throws SQLException, Exception {
 		ResultSet rs;
 		String sql;
 		List<Product> products = new ArrayList<>();

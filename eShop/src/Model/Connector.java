@@ -2,11 +2,11 @@ package Model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-/** @author arturopavon
-* Date: 11/12/2017
-* Lab 4
-* Connector.java
-*/
+/**
+ * 
+ * @author arturopavon and raquelnoblejas
+ *
+ */
 public class Connector {
 	 public Connection getConnection() throws Exception{
 		 Connection connect = null;

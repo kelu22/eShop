@@ -12,8 +12,12 @@ import application.Product;
 import application.User;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
-
-/** Manages control flow for logins */
+/**
+ * 
+ * @author arturopavon and raquelnoblejas
+ *
+ */
+/** Manages control flow for the whole application */
 public class LoginManager {
 	private Scene scene;
 	private User session;
@@ -39,7 +43,9 @@ public class LoginManager {
 	public void logout() {
 		showLoginScreen();
 	}
-
+	/**
+	 * Callback method invoked to  show the login application screen.
+	 */
 	public void showLoginScreen() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
@@ -50,7 +56,9 @@ public class LoginManager {
 			Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-
+	/**
+	 * Callback method invoked to  show the Main View screen.
+	 */
 	public void showMainView(String username,User session) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("mainview.fxml"));
@@ -61,7 +69,9 @@ public class LoginManager {
 			Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-		
+	/**
+	 * Callback method invoked to  show the Product View screen.
+	 */
 	public void showProduct(String username, Product p, User session) {
 		try {
 			
@@ -74,7 +84,9 @@ public class LoginManager {
 		}
 	}
 	
-	
+	/**
+	 * Callback method invoked to  show the ProductListView application screen.
+	 */
 	public void showProductListView(List<Product> productsList, String username, User session){
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("productList.fxml"));

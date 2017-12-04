@@ -5,9 +5,17 @@ import java.util.List;
 
 import application.Product;
 import application.User;
-
+/**
+ * 
+ * @author arturopavon and raquelnoblejas
+ *
+ */
 public interface daoModel {
-
+	/**
+	 * 
+	 * daoModel interface to proceed with the façade pattern
+	 *
+	 */
 	public void createTables() throws Exception, SQLException;
 
 	public void insertUser(User u) throws Exception;
