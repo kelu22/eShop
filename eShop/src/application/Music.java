@@ -6,16 +6,35 @@ import java.util.List;
 
 import javafx.scene.Scene;
 
+/**
+ * 
+ * @author arturopavon and raquelnoblejas
+ *
+ */
+
 public class Music extends Product {
+	/**
+	 * 
+	 * Author and albmuname for Music
+	 *
+	 */
 	private String author;
 	private String albumName;
-
+	/**
+	 * 
+	 * Music Constructors
+	 *
+	 */
 	public Music(String name, String description, String image, double price, double rate, int stockCounter, String purchaseDate, String author, String albumName) {
 		super(name, description, image, price, rate, stockCounter, purchaseDate);
 		this.author = author;
 		this.albumName = albumName;
 	}
-
+	/**
+	 * 
+	 * Getters and Setters for Music
+	 *
+	 */
 	public String getAuthor() {
 		return author;
 	}

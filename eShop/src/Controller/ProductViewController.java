@@ -14,8 +14,18 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class ProductViewController {
+/**
+ * 
+ * @author arturopavon and raquelnoblejas
+ *
+ */
 
+public class ProductViewController {
+	/**
+	 * 
+	 *Controller of the view of one single product
+	 *
+	 */
 	@FXML
 	private Button logoutButton;
 	@FXML
@@ -43,6 +53,12 @@ public class ProductViewController {
 	@FXML
 	private ListView reviewsList;
 
+	/**
+	 * 
+	 * Method to set the values of the view based on the product which was clicked from before
+	 * Listeners to know if buttons were pressed
+	 *
+	 */
 
 	public void userInteraction(final Model.LoginManager loginManager, String username, Product p, User session) {
 

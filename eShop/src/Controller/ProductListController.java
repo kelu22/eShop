@@ -17,7 +17,19 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Callback;
+
+/**
+ * 
+ * @author arturopavon and raquelnoblejas
+ *
+ */
+
 public class ProductListController {
+	/**
+	 * 
+	 * Controller of the view that shows a List of Products based on what it has been entered
+	 *
+	 */
 	@FXML
 	private ListView<String> listView;
 	@FXML
@@ -28,9 +40,17 @@ public class ProductListController {
 	private Label usernameLabel;
 	
 
-	
+	/**
+	 * 
+	 *Method to set the ListView Items
+	 *Creation of a Cell Factory to include Image near the name of the product
+	 *Listeners to see if a Image has been clicked or not
+	 *
+	 */
 	public void userInteraction(final Model.LoginManager loginManager, String username, List<Product> p,User session){
-        ObservableList<String> items =FXCollections.observableArrayList ();
+        
+		
+		ObservableList<String> items =FXCollections.observableArrayList ();
         String[] listOfImages = new String[p.size()];
         for (int i = 0;i<p.size();i++){
         	items.add(p.get(i).getName());
@@ -71,6 +91,11 @@ public class ProductListController {
         mainViewButton.setOnAction(e -> loginManager.showMainView(username,session));
 		logoutButton.setOnAction(e -> loginManager.logout());
     }
+	/**
+	 * 
+	 * Auxiliary method to return the Image asociated to a name based on ListView Position
+	 *
+	 */
 	public String returnImage(String name, String[] list,ObservableList<String> items){
 		for(int i = 0;i<list.length;i++){
 			if(name == items.get(i)){
@@ -79,7 +104,11 @@ public class ProductListController {
 		}
 		return "";
 	}
-
+	/**
+	 * 
+	 * Auxiliary method to know the product we are clicking based on the position in the ListView
+	 *
+	 */
 	public Product returnProduct(String name,List<Product> p){
 		for(int i = 0;i<p.size();i++){
 			if(name == p.get(i).getName()){

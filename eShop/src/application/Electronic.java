@@ -6,16 +6,31 @@ import java.util.List;
 
 import javafx.scene.Scene;
 
+/**
+ * 
+ * @author arturopavon and raquelnoblejas
+ *
+ */
+
 public class Electronic extends Product {
+	/**
+	 * Specifications and brand for the electronic product
+	 */
 	private String specifications;
 	private String brand;
 
+	/**
+	 * Electronic constructor
+	 */
+	
 	public Electronic(String name, String description, String image, double price, double rate, int stockCounter, String purchaseDate, String specifications, String brand) {
 		super(name, description, image, price, rate, stockCounter, purchaseDate);
 		this.specifications = specifications;
 		this.brand = brand;
 	}
-
+	/**
+	 * Getters and setters for Electronic
+	 */
 	public String getSpecifications() {
 		return specifications;
 	}

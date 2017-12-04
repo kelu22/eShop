@@ -3,13 +3,27 @@ package application;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author arturopavon and raquelnoblejas
+ *
+ */
+
 public class Customer extends User {
+	/**
+	 * Orderlist and Cart from the Customer atrinutes
+	 */
 	private List<Product> orderList = new ArrayList<Product>();
 	private List<Product> cart = new ArrayList<Product>();
-
+	/**
+	 * Customer constructor
+	 */
 	public Customer(String username, String password, boolean isAdmin) {
 		super(username, password, isAdmin);
 	}
+	/**
+	 * Customer getters and setters
+	 */
 
 	public List<Product> getOrderList() {
 		return orderList;

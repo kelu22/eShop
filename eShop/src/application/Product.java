@@ -4,7 +4,25 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
+/**
+ * 
+ * @author arturopavon and raquelnoblejas
+ *
+ */
+
 public abstract class Product {
+	/**
+	 * Name of product
+	 * Description of product
+	 * Url from Image
+	 * Price 
+	 * Rate
+	 * List of ratings
+	 * List of reviews
+	 * PurchaseDate
+	 * StockCounter
+	 *
+	 */
 	protected String name;
 	protected String description;
 	protected String image;
@@ -14,7 +32,26 @@ public abstract class Product {
 	protected List<Integer> ratings;
 	protected int stockCounter;
 	protected String purchaseDate;
-
+	/**
+	 * 
+	 * Constructor from Product
+	 *
+	 */
+	public Product(String name, String description, String image, double price, double rate, int stockCounter, String purchaseDate) {
+		this.name = name;
+		this.description = description;
+		this.image = image;
+		this.price = price;
+		this.rate = rate;
+		this.stockCounter = stockCounter;
+		this.purchaseDate = purchaseDate;
+	}
+	/**
+	 * 
+	 * Getters and setters for Product
+	 * Methods to be implemented for products
+	 *
+	 */
 	public String getName() {
 		return name;
 	}
@@ -79,15 +116,7 @@ public abstract class Product {
 		this.purchaseDate = purchaseDate;
 	}
 
-	public Product(String name, String description, String image, double price, double rate, int stockCounter, String purchaseDate) {
-		this.name = name;
-		this.description = description;
-		this.image = image;
-		this.price = price;
-		this.rate = rate;
-		this.stockCounter = stockCounter;
-		this.purchaseDate = purchaseDate;
-	}
+
 
 	public abstract void showView();
 

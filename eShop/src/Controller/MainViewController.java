@@ -77,10 +77,15 @@ public class MainViewController {
 	@FXML
 	private TextField searchBar;
 	
-	
+	/**
+	 * 
+	 * Method to see the user cart if he had one and set the overall view
+	 * It also allows to click on the different categories to see all the products from that category
+	 * It allows to see your Cart and logout
+	 * 
+	 */
 	public void userInteraction(final Model.LoginManager loginManager, String username, User session) throws Exception {
 		daoModel dao = new daoModelImpl();
-		System.out.println("My userpass:" + session.getPassword());
 		List<Product> products = new ArrayList<Product>(dao.getProducts());
 		List<Product> myProducts = new ArrayList<Product>(dao.getCart(session));
 		List<Product> moviesProducts = new ArrayList<Product>();
@@ -102,6 +107,8 @@ public class MainViewController {
 		}
 		//Setting values in the view from the database
 		usernameLabel.setText("Welcome back "+ username +"!");
+		
+		//Method to show 3 samples of the different products in the main view
 		
 		Music[] arr = new Music[3];
 		Electronic[] arr1 = new Electronic[3];
@@ -171,6 +178,7 @@ public class MainViewController {
 			}
 		});
 		
+		//Listeners to change between the different views depending if we click images or buttons
 		
 		cartButton.setOnAction(e -> loginManager.showProductListView(myProducts,username,session));
 		moviesButton.setOnAction(e -> loginManager.showProductListView(moviesProducts,username,session));
@@ -197,6 +205,11 @@ public class MainViewController {
 		
 		
 	}
+	/**
+	 * 
+	 * Searching method based on what is been written
+	 *
+	 */
 	
 	public void searchProductName (final Model.LoginManager loginManager, String search, String username, User session) throws Exception{
 		//Filter by name

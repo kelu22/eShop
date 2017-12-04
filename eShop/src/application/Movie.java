@@ -6,16 +6,32 @@ import java.util.List;
 
 import javafx.scene.Scene;
 
-public class Movie extends Product {
+/**
+ * 
+ * @author arturopavon and raquelnoblejas
+ *
+ */
 
+public class Movie extends Product {
+	/**
+	 * Duration and trailer for Movies
+	 */
 	private String duration;
 	private String trailer;
-
+	/**
+	 *  Constructor for movies
+	 */
 	public Movie(String name, String description, String image, double price, double rate, int stockCounter, String purchaseDate, String duration, String trailer) {
 		super(name, description, image, price, rate, stockCounter, purchaseDate);
 		this.duration = duration;
 		this.trailer = trailer;
 	}
+	
+	/**
+	 * 
+	 * Getters and setters for Movies
+	 *
+	 */
 
 	public String getDuration() {
 		return duration;
